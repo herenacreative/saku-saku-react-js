@@ -1,0 +1,25 @@
+@media screen and (max-width: 768px) {
+    .left__auth {
+        display: none;
+    }
+    .right__auth {
+        padding: 15px;
+    }
+    .font__large {
+        font-size: 20px !important;
+    }
+
+    .sider__nav {
+        margin: 5px !important;
+    }
+    .footer__start{
+        flex-direction: column !important;
+        width: 100% ;
+        margin: 5px !important;
+    }
+    .footer__sb{
+        flex-direction: column !important;
+        margin: 5px !important;
+        width: 100%;
+    }
+}

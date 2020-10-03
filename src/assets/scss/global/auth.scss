@@ -1,0 +1,36 @@
+:root {
+    --color-primary: #6379F4;
+    // 'default':#E5E5E5,
+    --color-light: #ffffff;
+    // 'dark': #3A3D42,
+    // 'error': #FF5B37,
+    // 'success': #1EC15F,
+    // 'light2': #F8F9FA
+}
+.main__auth {
+    height: 100vh;
+    width: 100vw;
+}
+.left__auth {
+    background-color: var(--color-primary);
+    padding: 3% 8% 3% 8%;
+}
+.right__auth {
+    padding: 7% 15% 3% 3%;
+}
+.img__auth {
+    width: 20rem;
+    height: auto;
+}
+.img__auth_center {
+    text-align: center;
+    display: block;
+}
+//right
+.form__input {
+    margin: 3rem 0 5rem;
+}
+.footer__auth {
+    text-align: center;
+    margin-top: 2rem;
+}

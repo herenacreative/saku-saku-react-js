@@ -1,0 +1,76 @@
+:root {
+    --color-primary: #6379F4;
+    // --color-default: #E5E5E5;
+    --color-light: #ffffff;
+    --color-grey: #DADADA;
+    --color-dark: #3A3D42;
+    // 'error': #FF5B37,
+    // 'success': #1EC15F,
+    // 'light2': #F8F9FA
+}
+
+@import './global/auth.scss';
+@import './global/responsive.scss';
+@import './global/temp.scss';
+
+body {
+    margin: 0;
+    font-family: -apple-system,
+        BlinkMacSystemFont,
+        'Nunito Sans',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+
+.font__light {
+    color: var(--color-light) !important;
+}
+
+.btn__primary {
+    background-color: var(--color-grey) !important;
+    border-radius: 5px !important;
+    color: var(--color-dark) !important;
+    border: none;
+}
+
+// auth
+// @media screen and (max-width: 768px) {
+//     .left__auth {
+//         display: none;
+//     }
+//     .font__large{
+//         font-size: 20px !important;
+//     }
+// }
+
+// .main__auth {
+//     height: 100vh;
+//     width: 100vw;
+// }
+// .left__auth {
+//     background-color: var(--color-primary);
+//     padding: 3% 8% 3% 8%;
+// }
+// .right__auth{
+//     padding: 7% 10% 7% 3%;
+// }
+// .img__auth{
+//     width: 20rem;
+//     height: auto;
+// }
+// .img__auth_center {
+//     text-align: center;
+//     display: block;
+// }
+// .font__light{
+//     color: var(--color-light) !important;
+// }
+// .form__input{
+//     margin: 3rem 0 5rem;
+// }
