@@ -6,8 +6,18 @@ import SignUp from "./SignUp";
 import ForgotPassword from "./ForgotPassword";
 import CreateNewPassword from "./CreateNewPassword";
 import CreateNewPin from "./CreateNewPin";
-import Dashboard from "./Dashboard"
-
+import Dashboard from "./Dashboard";
+import TopUp from "./TopUp";
+import History from "./History";
+import Amount from "./Amount";
+import Confirmation from "./Confirmation";
+import Status from "./Status";
+import Profile from "./Profile";
+import PersonalInfo from "./PersonalInfo";
+import ChangePassword from "./ChangePassword";
+import ChangePin from "./ChangePin";
+import AddNumberPhone from "./AddNumberPhone";
+import ManageNumberPhone from "./ManageNumberPhone";
 export {
     Login, 
     SignUp, 
@@ -17,5 +27,16 @@ export {
     NotFound, 
     CreateNewPassword, 
     CreateNewPin,
-    Dashboard
+    Dashboard,
+    TopUp,
+    History,
+    Amount,
+    Confirmation,
+    Status,
+    Profile,
+    PersonalInfo,
+    ChangePassword,
+    ChangePin,
+    AddNumberPhone,
+    ManageNumberPhone
 };

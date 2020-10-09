@@ -1,5 +1,5 @@
-import { Link, React } from "libraries";
-import { Row, Col, Typography, Input, Button } from 'antd';
+import { Link, React, useHistory, connect, history, useState, Component } from "libraries";
+import { Row, Col, Typography, Input, Button, Form } from 'antd';
 import { LeftAuth } from "components/organisms";
 import { 
     EyeInvisibleOutlined, 
@@ -7,11 +7,43 @@ import {
     MailOutlined, 
     LockOutlined 
 } from '@ant-design/icons';
-import '../../assets/scss/main.scss'
+import {login} from '../../redux/actions/auth';
+import '../../assets/scss/main.scss';
 
 const { Title, Text } = Typography;
 
-const Login = () => {
+class Login extends Component{
+    constructor(props){
+        super(props)
+            this.state = {
+                username: '',
+                password: ''
+        }
+    }
+
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        const log = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        this.props.login(log)
+        .then(()=>{
+            // history.push("/dashboard")
+            alert('success')
+            this.props.history.push("/dashboard")
+        // }).then((result) => {
+        //     if(result)
+        //     this.props.history.push("/dashboard")
+        //     // this.props.users.data.token
+        // })
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+        
+    }
+    render(){
     return (
         <>
             <Row className="main__auth">
@@ -27,13 +59,26 @@ const Login = () => {
                         Transfering money is eassier than ever, you can access Saku Saku wherever 
                         you are. Desktop, laptop, mobile phone? we cover all of that for you!
                     </Text>
-                    <div className="form__input">
+                    <form className="form__input" onSubmit={this.handleSubmit}>
+                        {/* <Form form={form} name="control-hooks">
+                        <Form.Item name="note" label="Note" rules={[{ required: true }]}>
+                            <Input value={user.email}
+                            onChange={(id, val)=>setUsers({...user, email: val})}
+                             />
+                        </Form.Item>
+                        </Form> */}
                         <Input
+                            // name={user.email}
+                            value={this.props.email}
+                            onChange={(e)=>this.setState({email: e.target.value})}
                             size="large"
                             placeholder="Enter your e-mail"
                             prefix={<MailOutlined className="site-form-item-icon" />}
                         />
                         <Input.Password
+                            // password={log.password}
+                            value={this.props.password}
+                            onChange={(e)=>this.setState({password: e.target.value})}
                             size="large"
                             style={{margin: "10px 0 10px"}}
                             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -45,10 +90,11 @@ const Login = () => {
                                 <Text>Forgot Password?</Text>
                             </Link>
                         </div>
-                    </div>
-                    <Button type="primary" block className="btn__primary">
-                        Login
-                    </Button>
+                    
+                        <Button type="primary" htmlType="submit" block className="btn__primary">
+                            Login
+                        </Button>
+                    </form>
                     <div className="footer__auth">
                         <Text>Don’t have an account? Let’s <Link to="/auth/sign-up">Sign Up</Link></Text>
                     </div>  
@@ -57,5 +103,13 @@ const Login = () => {
         </>
     )
 }
+}
 
-export default Login
+const mapStateToProps = (state) => ({
+  users: state.users
+})
+
+const mapDispatchToProps = {login}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

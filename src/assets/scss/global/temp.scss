@@ -1,38 +1,99 @@
-.header__nav{
+:root {
+    --color-primary: #6379F4;
+    // --color-default: #E5E5E5;
+    --color-light: #ffffff;
+    --color-grey: #DADADA;
+    --color-dark: #3A3D42;
+    // 'error': #FF5B37,
+    // 'success': #1EC15F,
+    // 'light2': #F8F9FA
+}
+.site-page-header {
     background-color: #fff !important;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    padding-left: 7em !important;
+    @media screen and (max-width: 768px) {
+        padding-left: 20px !important;
+        .profile {
+            display: none !important;
+        }
+        .float__right {
+            left: 4rem !important;
+        }
+    }
 }
-
+.profile{
+    margin-right: 25px;
+}
+.dashboard__temp{
+    min-height: 100vh;
+}
 .sider__nav {
     // background-color: #fff !important;
-    margin: 2rem 6rem 0 6rem;
+    margin: 1.5rem 6rem 1.5rem 6rem;
+}
+.nav{
+    border-radius: 20px !important;
 }
 .nav__nav{
     background-color: #fff !important;
+    border-radius: 15px !important;
 }
 .main__content{
     margin-left: .9rem;
     padding: 3em;
     width: 100%;
     background-color: #fff !important;
+    border-radius: 15px !important;
+    &__card{
+         margin: 0 .5rem 0 .5rem;
+         padding: 15px  !important;
+         width: 100%;
+         background-color: #fff !important;
+         border-radius: 15px !important;
+    }
 }
-.footer__auth {
-    background-color: aqua !important;
 
+.container__set {
+    background-color: var(--color-primary) !important;
 }
-.footer__sb{
-    padding: 0 3em 0 3em;
+.flex__sb{
+    // padding: 0 3em 0 3em;
     display: flex;
     justify-content: space-between;
-    align-content: space-around;
+    align-items: center;
+    // align-content: space-between;
     flex-direction: row;
+    @media screen and (max-width: 768px) {
+        flex-direction: row;
+        padding: 0px;
+    }
 }
-.footer__start {
+.flex__start {
     width: 30%;
     padding: 0 1em 0 3em;
     display: flex;
     justify-content: space-between;
     align-content: space-between;
     flex-direction: row;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+}
+.space-align-block {
+    padding-right: 5em;
+    flex: none;
+}
+.shadow__box{
+    padding: 1em 0 .4em 1em !important;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    margin: 7px 0 7px 0 !important;
+}
+.resize{
+    margin-right: .2rem !important;
+    padding: 5px !important;
+    width: 100px !important;
 }

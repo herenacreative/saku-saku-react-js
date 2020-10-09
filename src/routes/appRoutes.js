@@ -7,7 +7,18 @@ import {
     Dashboard, 
     Home, 
     Transfer, 
-    NotFound
+    NotFound,
+    TopUp,
+    History,
+    Amount,
+    Confirmation,
+    Status,
+    Profile,
+    PersonalInfo,
+    ChangePassword,
+    ChangePin,
+    AddNumberPhone,
+    ManageNumberPhone
 } from "pages";
 
 const appRoutes = [
@@ -45,7 +56,7 @@ const appRoutes = [
         name: "Dashboard",
         component: Dashboard,
         exact: true,
-        path: "/dashboard"
+        path: "/dashboard/"
     },
     {
         name: "Home",
@@ -60,10 +71,76 @@ const appRoutes = [
         path: "/transfer"
     },
     {
+        name: "TopUp",
+        component: TopUp,
+        exact: true,
+        path: "/top-up"
+    },
+    {
+        name: "History",
+        component: History,
+        exact: true,
+        path: "/history"
+    },
+    {
+        name: "Amount",
+        component: Amount,
+        exact: true,
+        path: "/transfer/:id"
+    },
+    {
+        name: "Confirmation",
+        component: Confirmation,
+        exact: true,
+        path: "/confirmation"
+    },
+    {
+        name: "Status",
+        component: Status,
+        exact: true,
+        path: "/status"
+    },
+    {
+        name: "Profile",
+        component: Profile,
+        exact: true,
+        path: "/profile"
+    },
+    {
+        name: "PersonalInfo",
+        component: PersonalInfo,
+        exact: true,
+        path: "/personal-info"
+    },
+    {
+        name: "ChangePassword",
+        component: ChangePassword,
+        exact: true,
+        path: "/change-password"
+    },
+    {
+        name: "ChangePin",
+        component: ChangePin,
+        exact: true,
+        path: "/change-pin"
+    },
+    {
+        name: "AddNumberPhone",
+        component: AddNumberPhone,
+        exact: true,
+        path: "/add-number-phone"
+    },
+    {
+        name: "ManageNumberPhone",
+        component: ManageNumberPhone,
+        exact: true,
+        path: "/manage-number-phone"
+    },
+    {
         name: "NotFound",
         component: NotFound,
         exact: true,
-    },
+    }    
 ];
 
 export default appRoutes;

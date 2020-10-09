@@ -1,0 +1,32 @@
+import {axios} from 'libraries';
+import config from '../../configs/index';
+
+export const login = log => {
+    return{
+        type: "LOGIN",
+        payload: axios({
+            method: 'POST',
+            url: `${config.baseURL}/auth/login`,
+            data: log
+        })
+    }
+}
+
+export const logout = () =>{
+    return{
+        type: "LOGOUT_FULFILLED"
+    }
+}
+
+export const register = () =>{
+    return{
+        type: "REGISTER",
+        payload: axios({
+            method: 'POST',
+            url: `${config.baseURL}/auth/sign-up`,
+            // headers: {
+            //   Authorization: token
+            // }
+        })
+    }
+}

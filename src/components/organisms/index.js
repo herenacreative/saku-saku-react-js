@@ -1,4 +1,6 @@
 import LeftAuth from "./LeftAuth";
-import Navigation from "./Navigation"
+import Navigation from "./Navigation";
+import Headers from "./Headers";
+import Footers from "./Footers";
 
-export {LeftAuth, Navigation};
+export {LeftAuth, Navigation, Headers, Footers};

@@ -1,4 +1,4 @@
-import { Link, React } from "libraries";
+import { React } from "libraries";
 import { Row, Col, Typography, Input, Button } from 'antd';
 import { LeftAuth } from "components/organisms";
 import { 

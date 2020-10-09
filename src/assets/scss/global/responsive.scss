@@ -4,22 +4,22 @@
     }
     .right__auth {
         padding: 15px;
+        margin-top: 10%;
     }
     .font__large {
         font-size: 20px !important;
     }
-
     .sider__nav {
         margin: 5px !important;
     }
-    .footer__start{
-        flex-direction: column !important;
-        width: 100% ;
+    .container__set{
+        padding: 10px 20px 10px 20px !important;
+    }
+    .main__content{
+        padding: 15px !important;
         margin: 5px !important;
     }
-    .footer__sb{
-        flex-direction: column !important;
-        margin: 5px !important;
-        width: 100%;
-    }
+    // .row__ {
+    //     margin-top: 8%;
+    // }
 }

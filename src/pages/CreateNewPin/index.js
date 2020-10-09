@@ -1,5 +1,5 @@
-import { Link, React } from "libraries";
-import { Row, Col, Typography, Input, Button } from 'antd';
+import { React } from "libraries";
+import { Row, Col, Typography, Button } from 'antd';
 import { LeftAuth } from "components/organisms";
 import { InputPin } from "components/molecules";
 import '../../assets/scss/main.scss'

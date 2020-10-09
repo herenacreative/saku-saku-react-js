@@ -1,4 +1,4 @@
-import { Link, React } from "libraries";
+import { React, Link } from "libraries";
 import { Row, Col, Typography, Input, Button } from 'antd';
 import { LeftAuth } from "components/organisms";
 import { MailOutlined } from '@ant-design/icons';
@@ -29,9 +29,11 @@ const ForgotPassword = () => {
                             prefix={<MailOutlined className="site-form-item-icon" />}
                         />
                     </div>
+                    <Link to="/auth/create-new-password">
                     <Button type="primary" block className="btn__primary">
                         Confirm
                     </Button>
+                    </Link>
                 </Col>
             </Row>
         </>

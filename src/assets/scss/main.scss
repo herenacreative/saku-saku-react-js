@@ -4,6 +4,7 @@
     --color-light: #ffffff;
     --color-grey: #DADADA;
     --color-dark: #3A3D42;
+    --color-default: #E5E8ED;
     // 'error': #FF5B37,
     // 'success': #1EC15F,
     // 'light2': #F8F9FA
@@ -31,6 +32,9 @@ code {
 .font__light {
     color: var(--color-light) !important;
 }
+.font__primary{
+    color: var(--color-primary) !important;
+}
 
 .btn__primary {
     background-color: var(--color-grey) !important;
@@ -39,38 +43,14 @@ code {
     border: none;
 }
 
-// auth
-// @media screen and (max-width: 768px) {
-//     .left__auth {
-//         display: none;
-//     }
-//     .font__large{
-//         font-size: 20px !important;
-//     }
-// }
+.bg__primary {
+    background-color: var(--color-primary) !important;
+}
 
-// .main__auth {
-//     height: 100vh;
-//     width: 100vw;
-// }
-// .left__auth {
-//     background-color: var(--color-primary);
-//     padding: 3% 8% 3% 8%;
-// }
-// .right__auth{
-//     padding: 7% 10% 7% 3%;
-// }
-// .img__auth{
-//     width: 20rem;
-//     height: auto;
-// }
-// .img__auth_center {
-//     text-align: center;
-//     display: block;
-// }
-// .font__light{
-//     color: var(--color-light) !important;
-// }
-// .form__input{
-//     margin: 3rem 0 5rem;
-// }
+.btn__default {
+    margin: 5px;
+    background-color: var(--color-default) !important;
+    color: var(--color-drak) !important;
+    border-radius: 8px !important;
+    text-align: left !important;
+}

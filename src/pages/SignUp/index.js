@@ -1,5 +1,5 @@
-import { Link, React } from "libraries";
-import { Row, Col, Typography, Input, Button } from 'antd';
+import { Link, React, useHistory, connect, useState } from "libraries";
+import { Row, Col, Typography, Input, Button, Form } from 'antd';
 import { LeftAuth } from "components/organisms";
 import { 
     EyeInvisibleOutlined, 
@@ -9,10 +9,31 @@ import {
     UserOutlined
 } from '@ant-design/icons';
 import '../../assets/scss/main.scss';
+import {register} from '../../redux/actions/auth';
 
 const { Title, Text } = Typography;
 
-const SignUp = () => {
+const SignUp = (props) => {
+    const [user, setUsers] = useState({email:'', password: '', username: ''})
+    const [form] = Form.useForm();
+    const history= useHistory();
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        props.register().then(()=>{
+            // history.push("/dashboard")
+            alert('success')
+        }).then((result) => {
+            if(result)
+            history.push("auth/login")
+        })
+
+        .catch((error)=>{
+            console.log(error);
+        })
+        
+    }
+
     return (
         <>
             <Row className="main__auth">
@@ -28,19 +49,26 @@ const SignUp = () => {
                         Transfering money is eassier than ever, you can access Saku Saku wherever 
                         you are. Desktop, laptop, mobile phone? we cover all of that for you!
                     </Text>
+                    <form onSubmit={handleSubmit}>
                     <div className="form__input">
                         <Input
+                            value={user.username}
+                            onChange={(id, val)=>setUsers({...user, username: val})}
                             size="large"
                             placeholder="Enter your username"
                             prefix={<UserOutlined className="site-form-item-icon" />}
                         />
                         <Input
+                        value={user.email}
+                            onChange={(id, val)=>setUsers({...user, email: val})}
                             size="large"
                             style={{margin: "10px 0 5px"}}
                             placeholder="Enter your e-mail"
                             prefix={<MailOutlined className="site-form-item-icon" />}
                         />
                         <Input.Password
+                        value={user.password}
+                            onChange={(id, val)=>setUsers({...user, password: val})}
                             size="large"
                             style={{margin: "5px 0 10px"}}
                             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -53,9 +81,12 @@ const SignUp = () => {
                             </Link>
                         </div>
                     </div>
-                    <Button type="primary" block className="btn__primary">
+                    <Link to="/auth/create-new-pin">
+                    <Button type="primary" htmlType="submit" block className="btn__primary">
                         Sign Up
                     </Button>
+                    </Link>
+                    </form>
                     <div className="footer__auth">
                         <Text>Don’t have an account? Let’s <Link to="/auth/login">Login</Link></Text>
                     </div>  
@@ -65,4 +96,12 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+
+const mapStateToProps = (state) => ({
+  users: state.users
+})
+
+const mapDispatchToProps = {register}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

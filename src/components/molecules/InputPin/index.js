@@ -1,4 +1,4 @@
-import { Link, React } from "libraries";
+import { React } from "libraries";
 import { Input, Col, Row } from 'antd';
 import style from './inputpin.module.scss'
 const InputPin = () => {

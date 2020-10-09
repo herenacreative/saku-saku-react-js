@@ -1,14 +1,18 @@
-import {React, ReactDOM} from 'libraries';
+import {React, ReactDOM, Provider, PersistGate} from 'libraries';
 import App from './App';
 import "antd/dist/antd.css";
 import * as serviceWorker from './serviceWorker';
+import './assets/scss/main.scss';
+import storage from "./redux/store";
 
-import './assets/scss/main.scss'
+const {store, persistor} = storage;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
 
