@@ -10,7 +10,6 @@ import promiseMiddleware from 'redux-promise-middleware'
 import {connect, Provider} from 'react-redux';
 import { PersistGate } from "redux-persist/integration/react";
 import { useHistory } from "react-router-dom";
-
 export {
     React, 
     ReactDOM, 
@@ -30,10 +29,9 @@ export {
     Provider,
     PersistGate,
     Component,
-    useHistory
+    useHistory,
 };
 
 export * from "react";
 export * from "react-router-dom";
 export * from "redux"
-

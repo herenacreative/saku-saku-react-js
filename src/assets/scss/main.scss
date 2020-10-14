@@ -28,12 +28,14 @@ code {
         monospace;
 }
 
-
 .font__light {
     color: var(--color-light) !important;
 }
 .font__primary{
     color: var(--color-primary) !important;
+}
+.font__12{
+    font-size: 12px !important;
 }
 
 .btn__primary {
@@ -41,6 +43,14 @@ code {
     border-radius: 5px !important;
     color: var(--color-dark) !important;
     border: none;
+}
+
+.btn__blue{
+    background-color: var(--color-primary) !important;
+    border-radius: 5px !important;
+    color: var(--color-light) !important;
+    border: none;
+    width: 93% !important;
 }
 
 .bg__primary {
@@ -53,4 +63,21 @@ code {
     color: var(--color-drak) !important;
     border-radius: 8px !important;
     text-align: left !important;
+}
+
+.input__line {
+    font-size: 16px !important;
+    border-bottom: 1px solid var(--color-grey) !important;
+    margin: 10px 0px 10px 0px !important;
+}
+
+.m__10 {
+    margin: 10px !important;
+}
+.mp {
+    margin-top: 10px !important;
+    padding: 15px !important;
+}
+.m__30{
+    margin: 30px 0 30px 0 !important;
 }

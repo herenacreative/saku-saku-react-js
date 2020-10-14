@@ -1,0 +1,20 @@
+.hc {
+    height: 150px;
+    @media screen and (max-width: 768px) {
+        margin-bottom: 25px;
+    }
+}
+.p__10{
+    padding: 10px !important;
+}
+.fs__14{
+    font-size:14px !important;
+}
+.fc__red{
+    color: #cf1322 !important;
+    font-size: 30px !important;
+}
+.fc__green{
+    color: #3f8600 !important;
+    font-size: 30px !important;
+}

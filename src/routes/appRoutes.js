@@ -18,7 +18,8 @@ import {
     ChangePassword,
     ChangePin,
     AddNumberPhone,
-    ManageNumberPhone
+    ManageNumberPhone,
+    SuccessCreatePin
 } from "pages";
 
 const appRoutes = [
@@ -137,10 +138,16 @@ const appRoutes = [
         path: "/manage-number-phone"
     },
     {
+        name: "SuccessCreatePin",
+        component: SuccessCreatePin,
+        exact: true,
+        path: "/auth/success-create-pin"
+    },
+    {
         name: "NotFound",
         component: NotFound,
         exact: true,
-    }    
+    },     
 ];
 
 export default appRoutes;

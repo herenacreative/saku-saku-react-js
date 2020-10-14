@@ -1,23 +1,31 @@
 import Home from "./Home";
-import Transfer from "./Transfer";
 import NotFound from "./NotFound";
-import Login from "./Login";
-import SignUp from "./SignUp";
-import ForgotPassword from "./ForgotPassword";
-import CreateNewPassword from "./CreateNewPassword";
-import CreateNewPin from "./CreateNewPin";
 import Dashboard from "./Dashboard";
 import TopUp from "./TopUp";
-import History from "./History";
-import Amount from "./Amount";
-import Confirmation from "./Confirmation";
-import Status from "./Status";
+
+//auth
+import Login from "./Auth/Login/index";
+import SignUp from "./Auth/SignUp/index";
+import ForgotPassword from "./Auth/ForgotPassword/index";
+import CreateNewPassword from "./Auth/CreateNewPassword/index";
+import CreateNewPin from "./Auth/CreateNewPin/index";
+import SuccessCreatePin from "./Auth/SuccessCreatePin/index";
+
+//transfer
+import Transfer from "./Transfer";
+import Amount from "./Transfer/Amount/index";
+import Confirmation from "./Transfer/Confirmation/index";
+import Status from "./Transfer/Status/index";
+import History from "./Transfer/History/index";
+
+//profile
 import Profile from "./Profile";
-import PersonalInfo from "./PersonalInfo";
-import ChangePassword from "./ChangePassword";
-import ChangePin from "./ChangePin";
-import AddNumberPhone from "./AddNumberPhone";
-import ManageNumberPhone from "./ManageNumberPhone";
+import AddNumberPhone from "./Profile/AddNumberPhone/index";
+import ChangePassword from "./Profile/ChangePassword/index";
+import PersonalInfo from "./Profile/PersonalInfo/index";
+import ChangePin from "./Profile/ChangePin/index";
+import ManageNumberPhone from "./Profile/ManageNumberPhone/index";
+
 export {
     Login, 
     SignUp, 
@@ -38,5 +46,6 @@ export {
     ChangePassword,
     ChangePin,
     AddNumberPhone,
-    ManageNumberPhone
+    ManageNumberPhone,
+    SuccessCreatePin
 };

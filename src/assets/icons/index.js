@@ -10,5 +10,9 @@ import iphone from "./phone.svg"
 import iplus from "./plus.svg"
 import iuser from "./user.png"
 import ivector from "./vector.svg"
+import success from "./success.svg"
+import failed from "./failed.svg"
+import gplay from "./gplay.svg"
+import appstore from "./appstore.svg"
 
-export {iarrowUp, iarrowUp1, iarrowUp2, ibell, ihome, ilock, ilogOut, imail, iphone, iplus, iuser, ivector}
+export {iarrowUp, iarrowUp1, iarrowUp2, ibell, ihome, ilock, ilogOut, imail, iphone, iplus, iuser, ivector, success, failed, gplay, appstore}

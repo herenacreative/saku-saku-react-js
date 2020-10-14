@@ -1,0 +1,61 @@
+:root {
+    --color-primary: #6379F4;
+    // --color-default: #E5E5E5;
+    --color-light: #ffffff;
+    --color-grey: #DADADA;
+    --color-dark: #3A3D42;
+    --color-default: #E5E8ED;
+    // 'error': #FF5B37,
+    // 'success': #1EC15F,
+    // 'light2': #F8F9FA
+}
+
+.left__content{
+    margin: 3rem 0px 0px 16rem;
+}
+.font__title{ 
+   color: var(--color-primary) !important;
+}
+.img__1{
+    width: 50%;
+    height: auto;
+}
+.btn__top{
+    float: right;
+    margin: 3rem 8rem 8rem 0px ;
+}
+.btn__light{
+    margin : 5px;
+    color : var(--color-primary) !important;
+    border-radius: 8px !important;
+    border-color: var(--color-primary) !important;
+    width: 100px;
+}
+.btn__primary {
+    margin: 5px;
+    color : var(--color-light) !important;
+    border-radius: 8px !important;
+    background-color: var(--color-primary) !important;
+    width: 100px;
+}
+.m__30{
+    margin-top: 30% !important;
+}
+.icons__{
+    margin-top: 2rem !important;
+}
+.p__10{
+    padding: 1em 10em 1em 10em; 
+}
+.text__ac{
+    text-align: center !important;
+}
+
+@media screen and (max-width: 768px) {
+    .left__content {
+        display: none;
+    }
+    .btn__top {;
+        margin: 10px;
+    }
+}
