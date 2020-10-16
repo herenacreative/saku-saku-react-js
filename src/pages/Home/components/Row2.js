@@ -1,22 +1,20 @@
-import { React, useHistory } from "libraries";
-import { Space, Avatar, Layout } from 'antd';
+import { React } from "libraries";
+import { Space, Layout } from 'antd';
 import '../../../assets/scss/main.scss';
 import { air, canon, dell, dropbox, hm, microsoft } from 'assets'
 import style from "../homes.module.scss";
 
 const Row2 = () => {
-  const history = useHistory()
-
   return (
     <>
-      <Layout>
-        <Space direction="horizontal" className={style.p__10}>
-          <img src={microsoft} size={100} />
-          <img src={dropbox} size={100} />
-          <img src={hm} size={100} />
-          <img src={air} size={100} />
-          <img src={canon} size={100} />
-          <img src={dell} size={100} />
+      <Layout className={style.main__}>
+        <Space className={style.p__10}>
+          <img src={microsoft} className={style.logos}/>
+          <img src={dropbox} className={style.logos}/>
+          <img src={hm} className={style.logos}/>
+          <img src={air} className={style.logos}/>
+          <img src={canon} className={style.logos}/>
+          <img src={dell} className={style.logos}/>
         </Space>
       </Layout>
     </>

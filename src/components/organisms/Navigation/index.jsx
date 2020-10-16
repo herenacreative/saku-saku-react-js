@@ -1,4 +1,4 @@
-import { React, useHistory } from "libraries";
+import { React, useHistory, connect, withRouter } from "libraries";
 import { Menu, Layout } from 'antd';
 import {
   PlusOutlined, 
@@ -8,10 +8,19 @@ import {
   HomeOutlined
 } from '@ant-design/icons';
 import style from './navigations.module.scss';
+import { logout } from 'redux/actions';
 
 const { Sider } = Layout;
-const Navigation = () => {
+
+const Navigation = (props) => {
   const history = useHistory()
+
+  const logout = () => {
+    props.logout()
+    console.log(props.history, 'jjj')
+    props.history.push("/auth/login")
+  }
+
   return (
     <>
       <Sider
@@ -39,7 +48,7 @@ const Navigation = () => {
             Profil
             </Menu.Item>
           <br />
-          <Menu.Item key="5" icon={<LogoutOutlined />} onClick={() => history.push("auth/login")}>
+          <Menu.Item key="5" icon={<LogoutOutlined />} onClick={logout}>
             Logout
             </Menu.Item>
         </Menu>
@@ -48,4 +57,9 @@ const Navigation = () => {
   );
 }
 
-export default Navigation
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+const mapDispatchToProps = { logout }
+const pushRoute = withRouter(Navigation)
+export default connect(mapStateToProps, mapDispatchToProps)(pushRoute)

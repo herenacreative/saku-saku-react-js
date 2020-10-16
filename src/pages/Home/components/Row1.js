@@ -1,4 +1,4 @@
-import { React, Link, useHistory } from "libraries";
+import { React, useHistory } from "libraries";
 import { Row, Col, Space, Avatar, Typography, Button } from 'antd';
 import '../../../assets/scss/main.scss';
 import { imgland1, gplay, appstore } from 'assets';
@@ -21,7 +21,7 @@ const Row1 = () => {
         </Col>
 
         {/* right content 1  */}
-        <Col flex="1 1">
+        <Col flex="1 1" className={style.right__content}>
           <div className={style.btn__top}>
             <Button className={style.btn__light} onClick={() => history.push('/auth/login')}>
               Login
@@ -31,17 +31,18 @@ const Row1 = () => {
             </Button>
           </div>
           
-          <div className={style.m__30}>
-            <Title className="font__large">
-              Awesome App
-              For Saving Time.
-            </Title>
-          </div>
-          <div className="m__30" style={{ width: '330px' }}>
-            <Text type="secondary">
-              We bring you a mobile app for banking problems that
-              oftenly wasting much of your times.
-            </Text>
+          <div className={style.text__}>
+            <div className={style.m__30}>
+              <Title className={style.width__}>
+                Awesome App For Saving <span className={style.font__title}>Time.</span>
+              </Title>
+            </div>
+            <div className={style.width__}>
+              <Text type="secondary">
+                We bring you a mobile app for banking problems that
+                oftenly wasting much of your times.
+              </Text>
+            </div>
           </div>
           <Button onClick={() => history.push('#')} className={style.btn__primary} >
             Try It Free

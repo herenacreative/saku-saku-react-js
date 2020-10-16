@@ -21,6 +21,7 @@ import {
     ManageNumberPhone,
     SuccessCreatePin
 } from "pages";
+import {PrivateRoute} from "utils";
 
 const appRoutes = [
     {
@@ -54,6 +55,7 @@ const appRoutes = [
         path: "/auth/create-new-pin"
     },
     {
+        PrivateRoute,
         name: "Dashboard",
         component: Dashboard,
         exact: true,

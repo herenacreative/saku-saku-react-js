@@ -30,7 +30,20 @@ class Login extends Component {
     this.props.login(log)
       .then(() => {
         message.success('Success Login...');
-        this.props.history.push("/dashboard")
+        console.log(this.props.auth, 'sem')
+        if(this.props.auth.data.verify === 1){
+          if (this.props.auth.data.role === 3){
+            this.props.history.push("/dashboard")
+          }else{
+            this.props.history.push("/profile")
+          }
+          // this.props.history.push("/auth/create-new-pin")
+        }else{
+          this.props.history.push("/auth/create-new-pin")
+        }
+        
+        // this.props.history.push("/dashboard")
+        
       })
       .catch((error) => {
         message.error('Email Or Password is Wrong')
@@ -97,7 +110,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  users: state.users
+  auth: state.auth
 })
 const mapDispatchToProps = { login }
 

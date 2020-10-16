@@ -7,7 +7,10 @@ export const login = log => {
     payload: axios({
       method: 'POST',
       url: `${config.baseURL}/auth/login`,
-      data: log
+      data: log,
+      // headers: {
+      //   'Access-Control-Allow-Origin': '*'
+      // }
     })
   }
 }

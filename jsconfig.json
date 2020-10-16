@@ -31,6 +31,9 @@
             ],
             "redux/actions": [
                 "./redux/actions"
+            ],
+            "utils": [
+                "./utils"
             ]
         }
     }

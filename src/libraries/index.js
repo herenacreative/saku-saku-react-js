@@ -10,6 +10,8 @@ import promiseMiddleware from 'redux-promise-middleware'
 import {connect, Provider} from 'react-redux';
 import { PersistGate } from "redux-persist/integration/react";
 import { useHistory } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 export {
     React, 
     ReactDOM, 
@@ -30,6 +32,7 @@ export {
     PersistGate,
     Component,
     useHistory,
+    InfiniteScroll
 };
 
 export * from "react";

@@ -10,5 +10,8 @@ import hm from "./logo/Group 23.png"
 import iphone2 from "./Group 10.svg"
 import ikey from "./Group 11.png"
 import idown from "./Group 12.png"
+import img8 from "./img/8.png"
+import img7 from "./img/7.png"
+import img4 from "./img/4.png"
 
-export {idown, ikey, iphone2, imageAuth, dropbox, imgland2, imgland1, air, canon, dell, microsoft, hm}
+export {idown, img8, img7, img4, ikey, iphone2, imageAuth, dropbox, imgland2, imgland1, air, canon, dell, microsoft, hm}
