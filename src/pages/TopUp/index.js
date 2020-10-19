@@ -26,19 +26,7 @@ const TopUp = (props) => {
 			<Layout className="dashboard__temp">
 				<Headers/>
 				<Layout className="sider__nav">
-					<Sider
-						className="nav__nav"
-						breakpoint="xs"
-						collapsedWidth="0"
-						onBreakpoint={broken => {
-								console.log(broken);
-						}}
-						onCollapse={(collapsed, type) => {
-								console.log(collapsed, type);
-						}}
-					>
-						<Navigation/>
-					</Sider>
+					<Navigation />
 					<div className="main__content">
 						<Content>
 							<Title level={5}>How To Top Up</Title>

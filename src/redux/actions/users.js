@@ -1,12 +1,17 @@
 import { axios } from 'libraries';
 import config from '../../configs/index';
 
-export const getAllUsers = (token) => {
+export const getAllUsers = (token, search, page, limit) => {
 	return {
 		type: "GET_USER_ALL",
 		payload: axios({
 			method: 'GET',
-			url: `${config.baseURL}/users`,
+			url: `${config.baseURL}/users/`,
+			params: {
+				search: search,
+				page: page,
+				limit: limit,
+			},
 			headers: {
 				Authorization: token
 			}
@@ -27,16 +32,16 @@ export const getIdUsers = (token, id) => {
 	}
 }
 
-export const patchUser = (id, data) => {
+export const patchUser = (id, formData, token) => {
 	return {
 		type: "PATCH_USER",
 		payload: axios({
 			method: 'PATCH',
 			url: `${config.baseURL}/users/${id}`,
-			data: data,
-			// headers: {
-			// 	Authorization: token
-			// }
+			data: formData,
+			headers: {
+				Authorization: token
+			}
 		})
 	}
 }

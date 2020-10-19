@@ -1,17 +1,18 @@
 import { React, useState, connect, useEffect, useHistory, Link, moment } from "libraries";
-import { Layout, Row, Col, Typography, Skeleton, Button, Space, Statistic, Tooltip, Empty } from 'antd';
+import { Layout, Row, Col, Typography, Skeleton, Button, Space, Statistic, Tooltip, Empty, Card } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
-import '../../assets/scss/main.scss';
+import '../../../assets/scss/main.scss';
 import style from './dashboards.module.scss';
 import { getAllTransfer } from 'redux/actions';
 import { PlusOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import { Cards } from "components/molecules";
-import config from "../../configs/index";
+import config from "../../../configs/index";
+import { ipeople, itf, iwal } from "assets";
 
 const { Content } = Layout;
-const { Text } = Typography;
+const { Text, Title } = Typography;
 
-const Dashboard = (props) => {
+const DashboardAdmin = (props) => {
   const [transfers, setTransfers] = useState([])
   const history = useHistory()
 
@@ -40,36 +41,30 @@ const Dashboard = (props) => {
           <Navigation />
           <Content>
             <Row className={style.hc}>
-              <Col className="main__content__card bg__primary flex__sb">
-                <div>
-                  <Statistic
-                    title={<Text className="font__light">Balance</Text>}
-                    value={props.auth.data.balance}
-                    valueStyle={{ color: '#fff', fontWeight: 'bold', fontSize: '30px' }}
-                    prefix="Rp"
+              <Col className={style.fx_b}>
+                <div className={style.card__s}>
+                  <Cards 
+                    image={ipeople} 
+                    nameUser={<Title level={5}>Total Users</Title>} 
+                    numPhone={<><Title level={2}>300 <span style={{fontSize: "12px"}}>Person</span></Title></>}
                   />
-                  <Text className="font__light">{props.auth.data.phone}</Text>
                 </div>
-                <Space direction="vertical">
-                  <Button
-                    size="large"
-                    className="resize"
-                    icon={<ArrowUpOutlined />}
-                    ghost
-                    onClick={() => history.push("transfer")}
-                  >
-                    Transfer
-                  </Button>
-                  <Button
-                    size="large"
-                    className="resize"
-                    icon={<PlusOutlined />}
-                    ghost
-                    onClick={() => history.push("top-up")}
-                  >
-                    Top Up
-                  </Button>
-                </Space>
+
+                <div className={style.card__s}>
+                  <Cards
+                    image={itf}
+                    nameUser={<Title level={5}>Total Transfer</Title>}
+                    numPhone={<><Title level={2}>300</Title></>}
+                  />
+                </div>
+
+                <div className={style.card__s}>
+                  <Cards
+                    image={iwal}
+                    nameUser={<Title level={5}>Total Balance</Title>}
+                    numPhone={<><Title level={3}><span style={{ fontSize: "12px" }}>Rp. </span>300.000.000</Title></>}
+                  />
+                </div>
               </Col>
             </Row>
             <Row className="row__">
@@ -135,8 +130,8 @@ const Dashboard = (props) => {
                           />
                         )
                       })
-                    :<Skeleton active/>
-                  :<Empty />
+                    :<Empty/>
+                  :<Skeleton active/>
                 }
               </Col>
               {/* col 3 Transaction History */}
@@ -156,4 +151,4 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = { getAllTransfer }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardAdmin)

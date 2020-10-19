@@ -29,7 +29,7 @@ const SignUp = (props) => {
     props.register(data)
       .then(() => {
         message.success('Registers Successfully')
-        history.push("/auth/create-new-pin")
+        history.push("/auth/login")
       })
       .catch((error) => {
         message.error('Upss Registers Not Successful...')

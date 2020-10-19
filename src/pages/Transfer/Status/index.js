@@ -1,31 +1,20 @@
-import { React, Link } from "libraries";
-import { Layout, Space, Typography, Button } from 'antd';
+import { React, connect } from "libraries";
+import { Layout, Typography, Button } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss'
 import { Cards, CardsText } from "components/molecules";
 import { ShareAltOutlined, DownloadOutlined } from '@ant-design/icons';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 const { Title } = Typography;
-const Status = () => {
+const Status = (props) => {
+    console.log(props.location.input, 'innn')
     return (
         <>
             <Layout className="dashboard__temp">
                 <Headers/>
                 <Layout className="sider__nav">
-                    <Sider
-                        className="nav__nav"
-                        breakpoint="xs"
-                        collapsedWidth="0"
-                        onBreakpoint={broken => {
-                            console.log(broken);
-                        }}
-                        onCollapse={(collapsed, type) => {
-                            console.log(collapsed, type);
-                        }}
-                    >
-                        <Navigation/>
-                    </Sider>
+                    <Navigation />
                     <div  className="main__content">
                         <Content>
                             <CardsText title="test" desc="test"/>
@@ -51,4 +40,8 @@ const Status = () => {
     )
 }
 
-export default Status
+
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+})
+export default connect(mapStateToProps)(Status)

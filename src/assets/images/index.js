@@ -13,5 +13,8 @@ import idown from "./Group 12.png"
 import img8 from "./img/8.png"
 import img7 from "./img/7.png"
 import img4 from "./img/4.png"
+import ipeople  from "./undraw_people_tax5.svg"
+import itf from "./undraw_transfer_money_rywa.svg"
+import iwal from "./undraw_wallet_aym5.svg"
 
-export {idown, img8, img7, img4, ikey, iphone2, imageAuth, dropbox, imgland2, imgland1, air, canon, dell, microsoft, hm}
+export {ipeople, itf, iwal, idown, img8, img7, img4, ikey, iphone2, imageAuth, dropbox, imgland2, imgland1, air, canon, dell, microsoft, hm}

@@ -1,14 +1,15 @@
-import { React, connect, useState } from "libraries";
+import { React, connect, useHistory } from "libraries";
 import { Layout, Typography } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss';
 import { CardsText } from "components/molecules";
+import { EditOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 const { Text, Title, Paragraph } = Typography;
 
 const ManageNumberPhone = (props) => {
-  const [editableStr, setEditableStr] = useState('');
+  const history = useHistory()
 
   return (
     <>
@@ -25,7 +26,7 @@ const ManageNumberPhone = (props) => {
                 </Text>
               </div>
               <div style={{ width: "300px", margin: "20px 0 20px 0" }}>
-                <CardsText title="Primary" desc={<Paragraph editable={{ onChange: setEditableStr }}>{props.auth.data.phone}</Paragraph>} />
+                <CardsText title="Primary" desc={props.auth.data.phone} count={<EditOutlined onClick={() => history.push("/add-number-phone")}/>}/>
               </div>
             </Content>
           </div>

@@ -51,8 +51,8 @@ const History = (props) => {
                       />
                     )
                   })
-                  : <Empty />
-                : <Skeleton active />
+                  : <Skeleton active />
+                : <Empty />
               }
               <Text type="secondary">This Month</Text>
             </Content>

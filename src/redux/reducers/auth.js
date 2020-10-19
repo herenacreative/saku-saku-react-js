@@ -2,7 +2,9 @@ const initialState = {
   isLoading: false,
   isError: false,
   errorMsg: "",
-  data: []
+  data: [],
+  successMsg: "",
+  isLogin: false,
 }
 
 const auth = (state = initialState, action) => {
@@ -26,15 +28,21 @@ const auth = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data.data
+        data: action.payload.data.data,
+        isLogin:true
       }
     case "LOGOUT_FILFILLED":
       return {
         ...state,
         isLoading: false,
         isError: false,
+        isLogin: false,
         errorMsg: "",
-        data: {}
+        data: {},
+        _persist: {
+          version: -1,
+          rehydrated: true
+        }
       };
     case "REGISTER_PENDING":
       return {

@@ -18,21 +18,7 @@ const ChangePin= () => {
             <Layout className="dashboard__temp">
                 <Headers/>
                 <Layout className="sider__nav">
-                    <Sider
-                        className="nav__nav"
-                        breakpoint="xs"
-                        collapsedWidth="0"
-                        onBreakpoint={broken => {
-                            console.log(broken);
-                        }}
-                        onCollapse={(collapsed, type) => {
-                            console.log(collapsed, type);
-                        }}
-                    >
-                        {/* <div className="nav"> */}
-                            <Navigation/>
-                        {/* </div> */}
-                    </Sider>
+                    <Navigation />
                     <div  className="main__content">
                         <Content>
                             <Title level={5}> Change Password </Title>

@@ -8,6 +8,10 @@ const { Content } = Layout;
 const { Text, Title } = Typography;
 
 const PersonalInfo = (props) => {
+  const name = props.auth.data.fullname
+  const firstname = name.split(' ').slice(0, -1).join(' ');
+  const lastname = name.split(' ').slice(-1).join(' ');
+  
   return (
     <>
       <Layout className="dashboard__temp">
@@ -23,8 +27,8 @@ const PersonalInfo = (props) => {
                   If you want to make changes on your information, contact our support.
                 </Text>
               </div>
-              <CardsText title="First Name" desc={props.auth.data.fullname}/>
-              <CardsText title="Last Name" desc={props.auth.data.fullname}/>
+              <CardsText title="First Name" desc={firstname}/>
+              <CardsText title="Last Name" desc={lastname}/>
               <CardsText title="Verified Email" desc={props.auth.data.email}/>
               <CardsText title="Phone" desc={props.auth.data.phone} count={<Link to="/manage-number-phone">manage</Link>} />
             </Content>

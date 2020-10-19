@@ -1,7 +1,7 @@
 import { React, useState, useHistory, connect } from "libraries";
 import { Row, Col, Input, Typography, Button, message } from 'antd';
 import { LeftAuth } from "components/organisms";
-import '../../../assets/scss/main.scss'
+import '../../../assets/scss/main.scss';
 import { patchUser } from 'redux/actions';
 
 const { Title, Text } = Typography;
@@ -22,12 +22,12 @@ const CreateNewPin = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const id = props.auth.data.id
-    const data = {
-      'pin': pin,
-      // 'Password': 'test',
+    const token = props.auth.data.tokenLogin
+    const formData = {
+      'pin': pin.join(''),
+      'verify': 1
     }
-    console.log(data, 'dat')
-    props.patchUser(id, data)
+    props.patchUser(id, formData, token)
       .then(() => {
         message.success('Create Pin Successfully')
         history.push("/auth/success-create-pin")
@@ -71,7 +71,7 @@ const CreateNewPin = (props) => {
               })}
 
             </Row>
-          <p>{pin.join('')}</p>
+          {/* <p>{pin.join('')}</p> */}
           <Button type="primary" htmlType="submit" block className="btn__primary">
             Confirm
           </Button>

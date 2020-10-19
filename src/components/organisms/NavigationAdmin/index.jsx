@@ -15,9 +15,13 @@ const { Sider } = Layout;
 const Navigation = (props) => {
   const history = useHistory()
 
-  const onLogout = () => {
+  const logout = () => {
+    console.log(localStorage, 'sl')
+    const TokenLogin = props.auth
+    localStorage.removeItem(TokenLogin);
     props.logout()
-    props.history.replace("/auth/login")
+    console.log(props.auth.data, 'jjj')
+    props.history.push("/auth/login")
   }
 
   return (
@@ -47,7 +51,7 @@ const Navigation = (props) => {
             Profil
             </Menu.Item>
           <br />
-          <Menu.Item key="5" icon={<LogoutOutlined />} onClick={()=>onLogout()}>
+          <Menu.Item key="5" icon={<LogoutOutlined />} onClick={logout}>
             Logout
             </Menu.Item>
         </Menu>

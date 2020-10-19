@@ -1,18 +1,14 @@
-import {React, BrowserRouter as Router, Switch, Route } from 'libraries';
-import { appRoutes } from 'routes';
+import {React, BrowserRouter as Router} from 'libraries';
+import Routes from 'routes';
 
-class App extends React.Component {
-  render(){
-    return (
-      <>
-        <Router>
-          <Switch>
-            {appRoutes.map(route => <Route {...route}/>)}
-          </Switch>
-        </Router>
-      </>
-    )
-  }
+const App = () => {
+  return (
+    <>
+      <Router>
+        <Routes/>
+      </Router>
+    </>
+  )
 }
 
-export default App;
+export default App

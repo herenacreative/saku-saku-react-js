@@ -26,6 +26,10 @@ import PersonalInfo from "./Profile/PersonalInfo/index";
 import ChangePin from "./Profile/ChangePin/index";
 import ManageNumberPhone from "./Profile/ManageNumberPhone/index";
 
+//admin
+import DashboardAdmin from "./Admin/DashboardAdmin/index"
+import DataUser from "./Admin/DataUser/index"
+
 export {
     Login, 
     SignUp, 
@@ -47,5 +51,7 @@ export {
     ChangePin,
     AddNumberPhone,
     ManageNumberPhone,
-    SuccessCreatePin
+    SuccessCreatePin,
+    DashboardAdmin,
+    DataUser
 };

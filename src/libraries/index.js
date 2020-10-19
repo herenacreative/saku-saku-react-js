@@ -11,6 +11,7 @@ import {connect, Provider} from 'react-redux';
 import { PersistGate } from "redux-persist/integration/react";
 import { useHistory } from "react-router-dom";
 import InfiniteScroll from 'react-infinite-scroll-component';
+import qs from 'qs';
 
 export {
     React, 
@@ -32,7 +33,8 @@ export {
     PersistGate,
     Component,
     useHistory,
-    InfiniteScroll
+    InfiniteScroll,
+    qs
 };
 
 export * from "react";

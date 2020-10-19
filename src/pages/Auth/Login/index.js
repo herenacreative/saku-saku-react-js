@@ -12,7 +12,7 @@ import '../../../assets/scss/main.scss';
 
 const { Title, Text } = Typography;
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,20 +30,15 @@ class Login extends Component {
     this.props.login(log)
       .then(() => {
         message.success('Success Login...');
-        console.log(this.props.auth, 'sem')
-        if(this.props.auth.data.verify === 1){
-          if (this.props.auth.data.role === 3){
+        if (this.props.auth.data.verify === 1) {
+          if (this.props.auth.data.role === 3) {
             this.props.history.push("/dashboard")
-          }else{
-            this.props.history.push("/profile")
+          } else {
+            this.props.history.push("/dashboard-admin-2")
           }
-          // this.props.history.push("/auth/create-new-pin")
-        }else{
+        } else {
           this.props.history.push("/auth/create-new-pin")
         }
-        
-        // this.props.history.push("/dashboard")
-        
       })
       .catch((error) => {
         message.error('Email Or Password is Wrong')
@@ -68,7 +63,7 @@ class Login extends Component {
               Transfering money is eassier than ever, you can access Saku Saku wherever
               you are. Desktop, laptop, mobile phone? we cover all of that for you!
             </Text>
-            
+
             <form className="form__input" onSubmit={this.handleSubmit}>
               <Input
                 value={this.props.email}
@@ -76,7 +71,7 @@ class Login extends Component {
                 className="input__line"
                 onChange={(e) => this.setState({ email: e.target.value })}
                 placeholder="Enter your e-mail"
-                prefix={<MailOutlined className="site-form-item-icon"/>}
+                prefix={<MailOutlined className="site-form-item-icon" />}
               />
               <Input.Password
                 value={this.props.password}
@@ -96,9 +91,9 @@ class Login extends Component {
                 Login
               </Button>
             </form>
-            
+
             <div className="footer__auth">
-              <Text>Don’t have an account? Let’s 
+              <Text>Don’t have an account? Let’s
                 <Link to="/auth/sign-up"> Sign Up</Link>
               </Text>
             </div>
