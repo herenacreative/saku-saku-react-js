@@ -1,16 +1,16 @@
-import { React, connect, useEffect, useState, useHistory, Component } from "libraries";
-import { Layout, Space, Typography, InputNumber, Input, Button, message, Empty, Skeleton } from 'antd';
+import { React, connect } from "libraries";
+import { Layout, Space, Typography, Input, Button, Empty, Skeleton } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss'
-import { Cards, InputPin } from "components/molecules";
+import { Cards } from "components/molecules";
 import { HighlightOutlined } from '@ant-design/icons';
 import { getIdUsers, postTransfer } from 'redux/actions'
 import config from "../../../configs/index";
 
-const { Sider, Content } = Layout;
-const { Text, Title } = Typography;
+const { Content } = Layout;
+const { Text } = Typography;
 
-class Amount extends Component {
+class Amount extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,26 +33,6 @@ class Amount extends Component {
       })
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const token = this.props.auth.data.tokenLogin
-    const data = {
-      receiver_id: this.props.match.params.id,
-      sender_id: this.props.auth.data.id,
-      amount: this.state.amount,
-      notes: this.state.notes,
-    }
-    this.props.postTransfer(token, data)
-      .then(() => {
-        message.success('Transfer Successfully')
-        this.props.history.push("/confirmation")
-      })
-      .catch((error) => {
-        message.error('Upss Transfer Not Successful...')
-        console.log(error);
-      })
-  }
-
   componentDidMount() {
     this.getUseId()
   }
@@ -69,6 +49,9 @@ class Amount extends Component {
               {this.props.users.data
                 ? this.props.users.data.length > 0
                   ? this.props.users.data.map((item, id) => {
+
+                    const total = item.balance - this.state.amount;
+
                     return (
                       <Content>
                         <Cards numPhone={item.phone} image={`${config.imgURL}/${item.photo}`} nameUser={item.fullname} />
@@ -78,42 +61,45 @@ class Amount extends Component {
                             press continue to the next steps.
                           </Text>
                         </div>
-                        {/* <form onSubmit={this.handleSubmit}> */}
-                          <div style={{ textAlign: "center", margin: "9% 0 9%" }}>
-                            <Space direction="vertical" align="center">
-                              <Input
-                                onChange={(e) => this.setState({ amount: e.target.value })}
-                                value={this.state.amount}
-                                // formatter={value => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                                // parser={value => value.replace(/\Rp\s?|(,*)/g, '')}
-                                // onChange={onChange}
-                                style={{ fontSize: "30px", border: "none", width: "300px", borderBottom: '.2px solid' }}
-                              />
-                              <Text>Rp {item.balance - this.state.amount} {console.log(this.state.amount, 'item')} Available</Text>
-                              <Input
-                                onChange={(e) => this.setState({ notes: e.target.value })}
-                                bordered={false}
-                                style={{ width: "300px", borderBottom: '.2px solid' }}
-                                placeholder="Add some notes"
-                                prefix={<HighlightOutlined className="site-form-item-icon" />}
-                              />
-                            </Space>
-                          </div>
+                        <div style={{ textAlign: "center", margin: "9% 0 9%" }}>
+                          <Space direction="vertical" align="center">
+                            <Input
+                              maxLength={total.length}
+                              prefix={"Rp. "}
+                              bordered={false}
+                              onChange={(e) => this.setState({ amount: e.target.value })}
+                              value={this.state.amount}
+                              type="number"
+                              // formatter={value => `Rp ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                              // parser={value => value.replace(/\Rp\s?|(,*)/g, '')}
+                              style={{ border: "none", borderBottom: '.2px solid' }}
+                            />
+                            {{total} === 0 ? <Text>Oppssss, Balance Rp. 0</Text>
+                            : <Text>Rp {total} Available</Text> }
+                            
+                            <Input
+                              onChange={(e) => this.setState({ notes: e.target.value })}
+                              bordered={false}
+                              style={{ width: "300px", borderBottom: '.2px solid' }}
+                              placeholder="Add some notes"
+                              prefix={<HighlightOutlined className="site-form-item-icon" />}
+                            />
+                          </Space>
+                        </div>
                         <Button onClick={() =>
                           this.props.history.push({
                             pathname: "/confirmation",
                             input: {
                               receiver_id: this.props.match.params.id,
-                              amount: this.state.amount,
-                              notes: this.state.notes,
+                              amount: this.state.amount || 0,
+                              notes: this.state.notes || "-",
                               created_at: this.state.created_at,
-                              balance: (`${item.balance - this.state.amount}`),
+                              balance: total,
                             }
                           })
-                        }  htmlType="submit" style={{ float: 'right', borderRadius: '5px', backgroundColor: "#6379F4", color: "#fff" }} type="primary">
-                            Confirm
+                        } htmlType="submit" style={{ float: 'right', borderRadius: '5px', backgroundColor: "#6379F4", color: "#fff" }}>
+                          Confirm
                         </Button>
-                        {/* </form> */}
                       </Content>
                     )
                   })

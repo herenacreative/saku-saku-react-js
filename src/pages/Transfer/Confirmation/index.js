@@ -1,88 +1,66 @@
-import { React, connect } from "libraries";
-import { Layout, Typography, Button, Modal, message, Input, Row, Col } from 'antd';
+import { React, connect, useState, moment } from "libraries";
+import { Layout, Typography, Button, Skeleton, Empty, Modal, message, Input, Row, Col } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss'
 import { Cards, CardsText } from "components/molecules";
-import { postTransfer } from "redux/actions";
+import { postTransfer, getIdUsers } from "redux/actions";
+import config from "../../../configs/index";
 
 const { Content } = Layout;
-
 const { Title, Text } = Typography;
-class Confirmation extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      ModalText: 'Content of the modal',
-      visible: false,
-      confirmLoading: false,
-      pin: new Array(6).fill("")
-    }
+
+const Confirmation = (props) => {
+  const [visible, setVisible] = useState(false)
+  const [pin, setPin] = useState(new Array(6).fill(""))
+  const getDetail = props.location.input
+
+  //  modal
+  const showModal = () => {
+    setVisible(true)
+  }
+  const handleCancel = () => {
+    setVisible(false)
   }
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      ModalText: 'The modal will be closed after two seconds',
-      confirmLoading: true,
-    });
-    setTimeout(() => {
-      this.setState({
-        visible: false,
-        confirmLoading: false,
-      });
-    }, 2000);
-  };
-
-  handleCancel = () => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  handleChange = (element, index) => {
+  //pin
+  const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    this.setState([...this.state.pin.map((d, idx) => (idx === index ? element.value : d))]);
+    setPin([...pin.map((d, idx) => (idx === index ? element.value : d))]);
 
     if (element.nextSibling) {
       element.nextSibling.focus()
     }
   }
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
-    const token = this.props.auth.data.tokenLogin
-    const getDetail = this.props.location.input
+    const token = props.auth.data.tokenLogin
+    const getDetail = props.location.input
     const data = {
       receiver_id: getDetail.receiver_id,
-      sender_id: this.props.auth.data.id,
+      sender_id: props.auth.data.id,
       amount: getDetail.amount,
       notes: getDetail.notes,
     }
-    this.props.postTransfer(token, data)
+    props.postTransfer(token, data)
       .then(() => {
-        // if (this.state.pin.join() === this.props.auth.data.pin) {
-        //   message.success('Transfer Successfully')
-        //   // this.props.history.push("/status")
-        //   this.props.history.push({
-        //     pathname: "/status",
-        //     input: this.transfer_id
-        //   })
-        //   this.setState({
-        //     visible: false,
-        //     confirmLoading: false,
-        //   });
-        // } else {
-        //   message.success('Ups... Pin is Wrong!!')
-        //   this.setState({
-        //     visible: false,
-        //   });
-        // }
-
+        const pins = pin.join('')
+        const pinOri = props.auth.data.pin
+        const results = (pins != pinOri)
+        if (results) {
+          message.error('Ups... Pin is Wrong!!')
+          props.history.push({
+            pathname: "/failed-transaction",
+            input: { getDetail }
+          })
+        }else{
+          message.success('Transfer Successfully')
+          props.history.push({
+            pathname: "/success-transaction",
+            input: { getDetail }
+          })
+          setVisible(false)
+        }
       })
       .catch((error) => {
         message.error('Upss Transfer Not Successful...')
@@ -90,77 +68,90 @@ class Confirmation extends React.Component {
       })
   }
 
-  render() {
-    const { visible, confirmLoading } = this.state;
-    const getDetail = this.props.location.input
-    return (
+  return (
+    <>
+      <Layout className="dashboard__temp">
+        <Headers />
+        <Layout className="sider__nav">
+          <Navigation />
+          <div className="main__content">
+            {props.users.data
+              ? props.users.data.length > 0
+                ? props.users.data.map((item, id) => {
 
-      <>
-        <Layout className="dashboard__temp">
-          <Headers />
-          <Layout className="sider__nav">
-            <Navigation />
-            <div className="main__content">
-              <Content>
-                <Title level={5}>Transfer To</Title>
-                <Cards image={this.props.auth.data.photo} nameUser={this.props.auth.data.fullname} numPhone={this.props.auth.data.phone} />
-                <Title level={5}>Detail</Title>
-                <CardsText title="Amount" desc={getDetail.amount} />
-                <CardsText title="Balance Left" desc={getDetail.balance} />
-                <CardsText title="Date & Time" desc={getDetail.created_at} />
-                <CardsText title="Notes" desc={getDetail.notes} />
+                  const time = moment(getDetail.created_at || moment.now()).format("lll");
 
-                <Button type="primary" onClick={this.showModal}>
-                  Confirm
-                </Button>
-              </Content>
-            </div>
-
-          </Layout>
-          <Footers />
+                  return (
+                    <Content key={id}>
+                      <Title level={5}>Transfer To</Title>
+                      <Cards image={`${config.imgURL}/${item.photo}`} nameUser={item.fullname} numPhone={item.phone} />
+                      <div className="m__10">
+                        <Title level={5}>Detail</Title>
+                        <CardsText title="Amount" desc={getDetail ? getDetail.amount : '-'} />
+                        <CardsText title="Balance Left" desc={getDetail ? getDetail.balance : '-'} />
+                        <CardsText title="Date & Time" desc={getDetail ? time : '-'} />
+                        <CardsText title="Notes" desc={getDetail ? getDetail.notes : '-'} />
+                        <Button onClick={showModal} 
+                          style={{ float: 'right', borderRadius: '5px', backgroundColor: "#6379F4", color: "#fff" }}
+                        >
+                          Confirm
+                        </Button>
+                      </div>
+                    </Content>
+                  )
+                })
+                : <p><Skeleton active /></p>
+              : <p><Empty /></p>
+            }
+          </div>
         </Layout>
+        <Footers />
+      </Layout>
 
-        <Modal
-          visible={visible}
-          onOk={this.handleOk}
-          confirmLoading={confirmLoading}
-          onCancel={this.handleCancel}
-          width={300}
-        >
-          <Title level={5}>Enter PIN to Transfer</Title>
-          <Text type="secondary">Enter your 6 digits PIN for confirmation to continue transferring money. </Text>
-          <form onSubmit={this.handleSubmit} className="form__input">
-            <Row gutter={12}>
-              {this.state.pin.map((data, id) => {
-                return (
-                  <>
-                    <Col span={4}>
-                      <Input onChange={e => this.handleChange(e.target, id)}
-                        onFocus={e => e.target.select()}
-                        value={data.pin}
-                        key={id}
-                        maxLength="1" />
-                    </Col>
-
-                    {console.log(this.state.pin, 'tessss')}
-                  </>
-                )
-              })}
-
-            </Row>
-            <Button type="primary" htmlType="submit" block className="btn__primary">
-              Confirm
+      {/* modal */}
+      <Modal
+        visible={visible}
+        width={350}
+        okButtonProps={{ hidden: true }}
+        cancelButtonProps={{ hidden: true }}
+      >
+        <Title level={5}>Enter PIN to Transfer</Title>
+        <Text type="secondary">Enter your 6 digits PIN for confirmation to continue transferring money. </Text>
+        <form onSubmit={handleSubmit} className="form__input">
+          <Row gutter={12} className="m__10">
+            {pin.map((data, id) => {
+              return (
+                <>
+                  <Col span={4}>
+                    <Input onChange={e => handleChange(e.target, id)}
+                      onFocus={e => e.target.select()}
+                      value={data.pin}
+                      key={id}
+                      maxLength="1" />
+                  </Col>
+                </>
+              )
+            })}
+            {console.log(pin.join(''), 'pin', props.auth.data.pin)}
+          </Row>
+          <Button style={{ margin: '20px 0 10px' }} type="primary" block htmlType="submit" className="btn__primary">
+            Confirm
           </Button>
-          </form>
-        </Modal>
-      </>
-    )
-  }
+          <Button onClick={handleCancel} type="primary" block className="btn__primary">
+            Cancel
+          </Button>
+        </form>
+      </Modal>
+      {/* modal */}
+
+    </>
+  )
 }
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  transfer: state.transfer
+  transfer: state.transfer,
+  users: state.users
 })
-const mapDispatchToProps = { postTransfer }
+const mapDispatchToProps = { postTransfer, getIdUsers }
 export default connect(mapStateToProps, mapDispatchToProps)(Confirmation)

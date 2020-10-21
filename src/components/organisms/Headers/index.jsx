@@ -7,8 +7,6 @@ import config from '../../../configs/index';
 const { Text, Title } = Typography;
 
 const Headers = (props) => {
-  const [user, setUser] = useState([])
-
   return (
     <>
       <PageHeader

@@ -1,5 +1,5 @@
 import { React, connect, Link, useEffect, useState, useHistory } from "libraries";
-import { Layout, Typography, Modal, message, Row, Col, Button, Space, Empty, Skeleton, Image, Input } from 'antd';
+import { Layout, Typography, Modal, message, Row, Col, Button, Space, Empty, Skeleton, Image, Input, Form } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../assets/scss/main.scss';
 import { getIdUsers, getAllUsers, patchUser } from 'redux/actions';
@@ -11,11 +11,16 @@ const { Content } = Layout;
 const { Text, Title } = Typography;
 
 const Profile = (props) => {
+  const pht = props.auth.data.photo
+  const name = props.auth.data.fullname
+  const fn = name.split(' ').slice(0, -1).join(' ');
+  const ln = name.split(' ').slice(-1).join(' ');
+
   const [user, setUser] = useState([])
-  const [photo, setPhoto] = useState('')
+  const [photo, setPhoto] = useState(pht)
   const [visible, setVisible] = useState(false)
-  const [firstname, setFirstname] = useState('')
-  const [lastname, setLastname] = useState('')
+  const [firstname, setFirstname] = useState(fn)
+  const [lastname, setLastname] = useState(ln)
   const history = useHistory()
 
   const showModal=()=>{
@@ -41,8 +46,8 @@ const Profile = (props) => {
     getUserAll()
   }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = () => {
+    // e.preventDefault()
     const id = props.auth.data.id
     const token = props.auth.data.tokenLogin
     const formData = new FormData();
@@ -53,15 +58,13 @@ const Profile = (props) => {
       .then(() => {
         message.success('Update Profile Successfully')
         setVisible(false)
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         message.error('Upss Update Profile Not Successful...')
         console.log(error);
       })
   }
-
-
 
   return (
     <>
@@ -141,27 +144,33 @@ const Profile = (props) => {
       </Layout>
 
       <Modal
+        title= "Update Profile"
         visible={visible}
-        // onOk={handleOk}
-        onCancel={handleCancel}
+        okButtonProps={{ hidden: true }}
+        cancelButtonProps={{ hidden: true }}
       >
-        <form onSubmit={handleSubmit}>
+        <Form onFinish={handleSubmit}>
           <Input
             value={firstname}
             onChange={e => setFirstname(e.target.value)}
             placeholder="Input your Fistname"
           />
-          <Input
-            value={lastname}
-            onChange={e => setLastname(e.target.value)}
-            placeholder="Input your Lastname"
-          />
-          <Input type="file"
-            onChange={e => setPhoto(e.target.files[0])}/>
-          <Button type="primary" htmlType="submit" block className="btn__primary">
-           Update Profile
-          </Button>
-        </form>
+            <Input
+              style={{ marginTop: "20px" }}
+              value={lastname}
+              onChange={e => setLastname(e.target.value)}
+              placeholder="Input your Lastname"
+            />
+          <Input style={{ marginTop: "20px" }} type="file" onChange={e => setPhoto(e.target.files[0])}/>
+          <span style={{ marginTop: "20px", float: "right" }}>
+            <Button style={{ marginRight: "20px"}} type="primary" htmlType="submit" className="btn__primary">
+            Update Profile
+            </Button>
+            <Button onClick={handleCancel} type="primary" className="btn__primary">
+              Cancel
+            </Button>
+          </span>
+        </Form>
       </Modal>
     </>
   )

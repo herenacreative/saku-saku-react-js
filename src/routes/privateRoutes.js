@@ -6,7 +6,8 @@ import {
     History,
     Amount,
     Confirmation,
-    Status,
+    SuccessTransaction,
+    FailedTransaction,
     Profile,
     PersonalInfo,
     ChangePassword,
@@ -62,10 +63,16 @@ const privateRoutes = [
         path: "/confirmation"
     },
     {
-        name: "Status",
-        component: Status,
+        name: "SuccessTransaction",
+        component: SuccessTransaction,
         exact: true,
-        path: "/status"
+        path: "/success-transaction"
+    },
+    {
+        name: "FailedTransaction",
+        component: FailedTransaction,
+        exact: true,
+        path: "/failed-transaction"
     },
     {
         name: "Profile",

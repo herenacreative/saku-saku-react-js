@@ -72,7 +72,7 @@ const CreateNewPin = (props) => {
 
             </Row>
           {/* <p>{pin.join('')}</p> */}
-          <Button type="primary" htmlType="submit" block className="btn__primary">
+          <Button style={{marginTop: '30px'}} type="primary" htmlType="submit" block className="btn__primary">
             Confirm
           </Button>
           </form>

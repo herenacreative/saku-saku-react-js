@@ -8,7 +8,7 @@ import { Cards } from "components/molecules";
 import config from '../../configs/index';
 
 const { Title } = Typography
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 
 const Transfer = (props) => {
   const [users, setUsers] = useState([])
@@ -18,7 +18,7 @@ const Transfer = (props) => {
   useEffect(() => {
     let parsed = qs.parse(props.location.search);
     let search = parsed.search || "";
-    let limit = parsed.limit || "10";
+    let limit = parsed.limit || "100";
     let page = parsed.page || "";
     const token = props.auth.data.tokenLogin
     props.getAllUsers(token, search, page, limit)

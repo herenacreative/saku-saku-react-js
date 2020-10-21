@@ -15,7 +15,8 @@ import SuccessCreatePin from "./Auth/SuccessCreatePin/index";
 import Transfer from "./Transfer";
 import Amount from "./Transfer/Amount/index";
 import Confirmation from "./Transfer/Confirmation/index";
-import Status from "./Transfer/Status/index";
+import SuccessTransaction from "./Transfer/Status/index";
+import FailedTransaction from "./Transfer/Status/index";
 import History from "./Transfer/History/index";
 
 //profile
@@ -44,7 +45,7 @@ export {
     History,
     Amount,
     Confirmation,
-    Status,
+    // Status,
     Profile,
     PersonalInfo,
     ChangePassword,
@@ -53,5 +54,7 @@ export {
     ManageNumberPhone,
     SuccessCreatePin,
     DashboardAdmin,
-    DataUser
+    DataUser,
+    SuccessTransaction, 
+    FailedTransaction
 };

@@ -1,107 +1,180 @@
-import {React} from "libraries";
-// import { Table } from 'antd';
-import { Layout, Table, Typography } from 'antd';
-import { Footers, Headers, Navigation } from "components/organisms";
-import '../../../assets/scss/main.scss'
-const { Header, Footer, Sider, Content } = Layout;
+import { React, connect, Link, useEffect, useState, qs, useHistory } from "libraries";
+import { Layout, Table, Typography, Tooltip, Button, Image, message, Popconfirm } from 'antd';
+import { AddUser, EditUser, Footers, Headers, Navigation, NavigationAdmin } from "components/organisms";
+import '../../../assets/scss/main.scss';
+import { getAllUsers, deleteUser } from 'redux/actions';
+import { EditOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import config from '../../../configs/index';
 
+const { Content } = Layout;
 const { Text } = Typography;
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-    },
-    {
-        title: 'Chinese Score',
-        dataIndex: 'chinese',
-        sorter: {
-            compare: (a, b) => a.chinese - b.chinese,
-            multiple: 3,
-        },
-    },
-    {
-        title: 'Math Score',
-        dataIndex: 'math',
-        sorter: {
-            compare: (a, b) => a.math - b.math,
-            multiple: 2,
-        },
-    },
-    {
-        title: 'English Score',
-        dataIndex: 'english',
-        sorter: {
-            compare: (a, b) => a.english - b.english,
-            multiple: 1,
-        },
-    },
-];
 
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        chinese: 98,
-        math: 60,
-        english: 70,
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        chinese: 98,
-        math: 66,
-        english: 89,
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        chinese: 98,
-        math: 90,
-        english: 70,
-    },
-    {
-        key: '4',
-        name: 'Jim Red',
-        chinese: 88,
-        math: 99,
-        english: 89,
-    },
-];
+const DataUser = (props) => {
+    const [users, setUsers] = useState([])
+    const history = useHistory()
 
-function onChange(pagination, filters, sorter, extra) {
-    console.log('params', pagination, filters, sorter, extra);
-}
+    useEffect(() => {
+        console.log(props.auth, 'n', props.users)
+        let parsed = qs.parse(props.location.search);
+        let search = parsed.search || "";
+        let limit = parsed.limit || "100";
+        let page = parsed.page || "";
+        const token = props.auth.data.tokenLogin
+        props.getAllUsers(token, search, page, limit)
+            .then(res => {
+                setUsers(res.action.payload.data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [])
 
-const DataUser = () => {
+    const onDelete = (id) => {
+        const token = props.auth.data.tokenLogin
+        props.deleteUser(token, id)
+        .then((res) => {
+            window.location.reload();
+            message.success("success")
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }
+
+    const columns = [
+        {
+            title: 'ID',
+            dataIndex: 'id',
+            fixed: 'left',
+            width: '50px',
+            sorter: {
+                compare: (a, b) => a.id - b.id,
+                multiple: 1,
+            },
+        },
+        {
+            title: 'Fullname',
+            dataIndex: 'fullname',
+            sorter: {
+                sorter: (a, b) => a.fullname - b.fullname,
+                sortDirections: ['descend', 'ascend'],
+            },
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+        },
+        {
+            title: 'Username',
+            dataIndex: 'username',
+        },
+        {
+            title: 'Photo',
+            dataIndex: 'photo',
+        },
+        {
+            title: 'Balance',
+            dataIndex: 'balance',
+            sorter: {
+                compare: (a, b) => a.balance - b.balance,
+                multiple: 1,
+            },
+        },
+        {
+            title: 'Verify',
+            dataIndex: 'verify',
+            width: '75px',
+            sorter: {
+                compare: (a, b) => a.verify - b.verify,
+                multiple: 1,
+            },
+        },
+        {
+            title: 'Role',
+            dataIndex: 'role',
+            width: '75px',
+            sorter: {
+                compare: (a, b) => a.role - b.role,
+                multiple: 1,
+            },
+        },
+        {
+            title: 'Update',
+            dataIndex: 'update',
+            fixed: 'right',
+            width: '100px'
+        },
+        {
+            title: 'Delete',
+            dataIndex: 'delete',
+            fixed: 'right',
+        }
+    ]
+
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    }
+
+    const data = [{}]
+
+    users.map((item, id)=> {
+        data.push({
+            key: id,
+            id: item.id,
+            fullname: item.fullname,
+            email: item.email,
+            photo: <Image width={50} height={50} src={`${config.imgURL}/${item.photo}`}/>,
+            username: item.username,
+            balance: item.balance,
+            verify: item.verify,
+            role: item.role,
+            update: 
+            // <Link to={`/data-user/${item.id}`}>
+                <EditUser match={props.match} detailUser={item} onClick={() => history.push(`data-user/${item.id}`)}/>,
+            //  </Link>,
+             // update: <Tooltip title="search">
+            //         <Button
+            //             onClick={()=>history.push(`transfer/${item.id}`)} 
+            //             style={{ marginRight: "10px" }} 
+            //             type="primary" 
+            //             shape="circle" 
+            //             icon={<EditOutlined />} 
+            //         />
+            //     </Tooltip>,
+            delete: 
+                <Popconfirm title="Are you sure？" onConfirm={()=>onDelete(item.id)} icon={<QuestionCircleOutlined style={{ color: 'red' }} />}>
+                <Button
+                    style={{ marginRight: "10px" }}
+                    type="primary"
+                    shape="circle"
+                    icon={<DeleteOutlined />}
+                />
+                </Popconfirm>
+        })
+        return data
+    })
+
     return (
         <>
             <Layout className="dashboard__temp">
                 <Headers />
                 <Layout className="sider__nav">
-                    <Sider
-                        className="nav__nav"
-                        breakpoint="xs"
-                        collapsedWidth="0"
-                        onBreakpoint={broken => {
-                            console.log(broken);
-                        }}
-                        onCollapse={(collapsed, type) => {
-                            console.log(collapsed, type);
-                        }}
-                    >
-                        {/* <div className="nav"> */}
-                        <Navigation />
-                        {/* </div> */}
-                    </Sider>
+                    <NavigationAdmin />
                     <div className="main__content">
-                        <Content><Table columns={columns} dataSource={data} onChange={onChange} /></Content>
+                        <Table width="100" columns={columns} dataSource={data} scroll={{ x: 1300 }} onChange={onChange} />
                     </div>
-
                 </Layout>
                 <Footers />
             </Layout>
         </>
     )
-//  const DataUser = () => { return(<Table columns={columns} dataSource={data} onChange={onChange} />)};
 }
- export default DataUser
+
+const mapStateToProps = (state) => ({
+    auth: state.auth,
+    users: state.topUp,
+    transfer: state.transfer
+})
+
+const mapDispatchProps = { getAllUsers, deleteUser }
+export default connect(mapStateToProps, mapDispatchProps)(DataUser)

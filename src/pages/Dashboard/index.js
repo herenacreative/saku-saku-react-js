@@ -85,8 +85,9 @@ const Dashboard = (props) => {
                           <Text type='secondary' className={style.fs__14}>Income</Text>
                         </Space>  
                       </>}
-                      value={20000000}
+                      value={2000000000}
                       prefix="Rp"
+                      valueStyle={{fontSize: '18px', fontWeight: 'bold'}}
                     />
                   </Col>
                   <Col span={12} className={style.p__10}>
@@ -101,6 +102,7 @@ const Dashboard = (props) => {
                       </>}
                       value={20000000}
                       prefix="Rp"
+                      valueStyle={{ fontSize: '18px', fontWeight: 'bold' }}
                     />
                   </Col>
                 </Row>

@@ -6,7 +6,7 @@ import { CardsText } from "components/molecules";
 import { EditOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
-const { Text, Title, Paragraph } = Typography;
+const { Text, Title } = Typography;
 
 const ManageNumberPhone = (props) => {
   const history = useHistory()

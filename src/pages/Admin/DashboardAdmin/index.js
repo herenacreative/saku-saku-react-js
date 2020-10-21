@@ -1,6 +1,6 @@
 import { React, useState, connect, useEffect, useHistory, Link, moment } from "libraries";
 import { Layout, Row, Col, Typography, Skeleton, Button, Space, Statistic, Tooltip, Empty, Card } from 'antd';
-import { Footers, Headers, Navigation } from "components/organisms";
+import { Footers, Headers, Navigation, NavigationAdmin } from "components/organisms";
 import '../../../assets/scss/main.scss';
 import style from './dashboards.module.scss';
 import { getAllTransfer } from 'redux/actions';
@@ -38,7 +38,7 @@ const DashboardAdmin = (props) => {
       <Layout className="dashboard__temp">
         <Headers />
         <Layout className="sider__nav">
-          <Navigation />
+          <NavigationAdmin />
           <Content>
             <Row className={style.hc}>
               <Col className={style.fx_b}>

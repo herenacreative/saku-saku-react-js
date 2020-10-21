@@ -1,21 +1,16 @@
-import { React, connect, useState } from "libraries";
-import { Layout, Input, message, Typography, Button, InputNumber } from 'antd';
+import { React, connect, useState, useHistory } from "libraries";
+import { Layout, Input, message, Typography, Button } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss';
-import {
-  PhoneOutlined,
-  EyeTwoTone,
-  MailOutlined,
-  LockOutlined
-} from '@ant-design/icons';
-import { InputPin } from "components/molecules";
 import { patchUser } from 'redux/actions';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const { Text, Title } = Typography;
 const AddNumberPhone = (props) => {
-  const [phone, setPhone] = useState('')
+  const phn = props.auth.data.phone
+  const [phone, setPhone] = useState(phn)
+  const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -27,6 +22,7 @@ const AddNumberPhone = (props) => {
     props.patchUser(id, formData, token)
       .then(() => {
         message.success('Update Phone Successfully')
+        history.push('/manage-number-phone')
       })
       .catch((error) => {
         message.error('Upss Update Phone not Successful...')
