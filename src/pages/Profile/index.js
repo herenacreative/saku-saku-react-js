@@ -1,8 +1,8 @@
-import { React, connect, Link, useEffect, useState, useHistory } from "libraries";
+import { React, connect, Link, useEffect, useState, useHistory, withRouter } from "libraries";
 import { Layout, Typography, Modal, message, Row, Col, Button, Space, Empty, Skeleton, Image, Input, Form } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../assets/scss/main.scss';
-import { getIdUsers, getAllUsers, patchUser } from 'redux/actions';
+import { getIdUsers, getAllUsers, patchUser, logout } from 'redux/actions';
 import { Cards } from "components/molecules";
 import config from '../../configs/index';
 import { EditOutlined } from '@ant-design/icons';
@@ -23,7 +23,7 @@ const Profile = (props) => {
   const [lastname, setLastname] = useState(ln)
   const history = useHistory()
 
-  const showModal=()=>{
+  const showModal = () => {
     setVisible(true)
   }
 
@@ -66,6 +66,11 @@ const Profile = (props) => {
       })
   }
 
+  const onLogout = () => {
+    props.logout()
+    props.history.replace("/auth/login")
+  }
+
   return (
     <>
       <Layout className="dashboard__temp">
@@ -78,7 +83,7 @@ const Profile = (props) => {
               <Col className="main__content" style={{ textAlign: "center" }}>
                 <Space direction="vertical">
                   <Image width={50} height={50} src={`${config.imgURL}/${props.auth.data.photo}`} />
-                  <EditOutlined onClick={showModal}/>
+                  <EditOutlined onClick={showModal} />
                   <Title level={5}>{props.auth.data.fullname}</Title>
                   <Text type="secondary">{props.auth.data.phone}</Text>
                 </Space>
@@ -111,7 +116,7 @@ const Profile = (props) => {
                 >
                   Change PIN
                 </Button>
-                <Button type="primary" className="btn__default" block>
+                <Button type="primary" className="btn__default" block onClick={() => onLogout()}>
                   Logout
                 </Button>
               </Col>
@@ -144,7 +149,7 @@ const Profile = (props) => {
       </Layout>
 
       <Modal
-        title= "Update Profile"
+        title="Update Profile"
         visible={visible}
         okButtonProps={{ hidden: true }}
         cancelButtonProps={{ hidden: true }}
@@ -155,16 +160,16 @@ const Profile = (props) => {
             onChange={e => setFirstname(e.target.value)}
             placeholder="Input your Fistname"
           />
-            <Input
-              style={{ marginTop: "20px" }}
-              value={lastname}
-              onChange={e => setLastname(e.target.value)}
-              placeholder="Input your Lastname"
-            />
-          <Input style={{ marginTop: "20px" }} type="file" onChange={e => setPhoto(e.target.files[0])}/>
+          <Input
+            style={{ marginTop: "20px" }}
+            value={lastname}
+            onChange={e => setLastname(e.target.value)}
+            placeholder="Input your Lastname"
+          />
+          <Input style={{ marginTop: "20px" }} type="file" onChange={e => setPhoto(e.target.files[0])} />
           <span style={{ marginTop: "20px", float: "right" }}>
-            <Button style={{ marginRight: "20px"}} type="primary" htmlType="submit" className="btn__primary">
-            Update Profile
+            <Button style={{ marginRight: "20px" }} type="primary" htmlType="submit" className="btn__primary">
+              Update Profile
             </Button>
             <Button onClick={handleCancel} type="primary" className="btn__primary">
               Cancel
@@ -180,6 +185,7 @@ const mapStateToProps = (state) => ({
   users: state.users,
   auth: state.auth
 })
-const mapDispatchToProps = { getIdUsers, getAllUsers, patchUser }
+const mapDispatchToProps = { getIdUsers, getAllUsers, patchUser, logout }
+const pushRoute = withRouter(Profile)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, mapDispatchToProps)(pushRoute)

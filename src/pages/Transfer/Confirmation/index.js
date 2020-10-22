@@ -34,38 +34,36 @@ const Confirmation = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    const token = props.auth.data.tokenLogin
-    const getDetail = props.location.input
-    const data = {
-      receiver_id: getDetail.receiver_id,
-      sender_id: props.auth.data.id,
-      amount: getDetail.amount,
-      notes: getDetail.notes,
-    }
-    props.postTransfer(token, data)
-      .then(() => {
-        const pins = pin.join('')
-        const pinOri = props.auth.data.pin
-        const results = (pins != pinOri)
-        if (results) {
-          message.error('Ups... Pin is Wrong!!')
-          props.history.push({
-            pathname: "/failed-transaction",
-            input: { getDetail }
-          })
-        }else{
-          message.success('Transfer Successfully')
+    const pins = pin.join('')
+    const pinOri = props.auth.data.pin
+    if (pins != pinOri) {
+      message.error('Ups... Pin is Wrong!!')
+    } else {
+      const token = props.auth.data.tokenLogin
+      const getDetail = props.location.input
+      const data = {
+        receiver_id: getDetail.receiver_id,
+        sender_id: props.auth.data.id,
+        amount: getDetail.amount,
+        notes: getDetail.notes,
+      }
+      props.postTransfer(token, data)
+        .then((res) => {
+          message.success(res.value.data.message)
           props.history.push({
             pathname: "/success-transaction",
             input: { getDetail }
           })
           setVisible(false)
-        }
-      })
-      .catch((error) => {
-        message.error('Upss Transfer Not Successful...')
-        console.log(error);
-      })
+        })
+        .catch((error) => {
+          message.error('Upss Transfer Not Successful...')
+          props.history.push({
+            pathname: "/failed-transaction",
+            input: { getDetail }
+          })
+        })
+    }
   }
 
   return (
@@ -91,7 +89,7 @@ const Confirmation = (props) => {
                         <CardsText title="Balance Left" desc={getDetail ? getDetail.balance : '-'} />
                         <CardsText title="Date & Time" desc={getDetail ? time : '-'} />
                         <CardsText title="Notes" desc={getDetail ? getDetail.notes : '-'} />
-                        <Button onClick={showModal} 
+                        <Button onClick={showModal}
                           style={{ float: 'right', borderRadius: '5px', backgroundColor: "#6379F4", color: "#fff" }}
                         >
                           Confirm

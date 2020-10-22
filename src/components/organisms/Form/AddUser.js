@@ -25,10 +25,6 @@ const EditUser = (props) => {
         setVisible(false)
     }
 
-    useEffect(() => {
-        console.log(props, 'ppp')
-    })
-
     const handleSubmit = () => {
         // e.preventDefault()
         const id = props.auth.data.id

@@ -31,7 +31,7 @@ const ChangePin = (props) => {
     props.patchUser(id, formData, token)
       .then(() => {
         message.success('Create Pin Successfully')
-        // history.push("/auth/success-create-pin")
+        window.location.reload();
       })
       .catch((error) => {
         message.error('Upss Create Pin Not Successful...')

@@ -16,7 +16,9 @@ import {
     ManageNumberPhone,
     SuccessCreatePin,
     DashboardAdmin,
-    DataUser
+    DataUser,
+    DataTopUp,
+    DataTransferAdmin
 } from "pages";
 
 const privateRoutes = [
@@ -127,6 +129,18 @@ const privateRoutes = [
         component: DataUser,
         exact: true,
         path: "/data-user"
+    },
+    {
+        name: "DataTopUp",
+        component: DataTopUp,
+        exact: true,
+        path: "/data-topup"
+    },
+    {
+        name: "DataTransferAdmin",
+        component: DataTransferAdmin,
+        exact: true,
+        path: "/data-transfer-admin"
     },
 ];
 

@@ -26,10 +26,6 @@ const EditUser = (props) => {
     setVisible(false)
   }
 
-  useEffect(() => {
-    console.log(props, 'ppp')
-  })
-
   const handleSubmit = () => {
     const id = props.auth.data.id
     const token = props.auth.data.tokenLogin
@@ -48,7 +44,7 @@ const EditUser = (props) => {
       .then(() => {
         message.success('Update Profile Successfully')
         // setVisible(false)
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => {
         message.error('Upss Update Profile Not Successful...')
@@ -131,6 +127,7 @@ const EditUser = (props) => {
             <Col span={12}>
               <Form.Item name="balance" label="balance">
                 <Input
+                  disabled={true}
                   value={user.balance}
                   onChange={(e) => setUser({ ...user, balance: e.target.value })}
                   placeholder="Please enter user balance"
@@ -153,6 +150,7 @@ const EditUser = (props) => {
             <Col span={12}>
               <Form.Item name="verify" label="Verify" >
                 <Input
+                  disabled={true}
                   value={user.verify}
                   onChange={(e) => setUser({ ...user, verify: e.target.value })}
                   placeholder="Please enter user verify"

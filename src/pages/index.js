@@ -30,6 +30,8 @@ import ManageNumberPhone from "./Profile/ManageNumberPhone/index";
 //admin
 import DashboardAdmin from "./Admin/DashboardAdmin/index"
 import DataUser from "./Admin/DataUser/index"
+import DataTopUp from "./Admin/DataTopUp/index"
+import DataTransferAdmin from "./Admin/DataTransferAdmin/index"
 
 export {
     Login, 
@@ -56,5 +58,7 @@ export {
     DashboardAdmin,
     DataUser,
     SuccessTransaction, 
-    FailedTransaction
+    FailedTransaction,
+    DataTopUp,
+    DataTransferAdmin
 };

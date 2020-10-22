@@ -14,18 +14,18 @@ export const getAllTransfer = (token, id) => {
   }
 }
 
-// export const getIdTransfer = (token, id) =>{
-//     return{
-//         type: "GET_ID_TRANSEFR",
-//         payload: axios({
-//             method: 'GET',
-//             url: `${config.baseURL}/transfer/${id}`,
-//             headers: {
-//               Authorization: token
-//             }
-//         })
-//     }
-// }
+export const getAdminTransfer = (token) =>{
+    return{
+        type: "GET_ADMIN_TRANSEFR",
+        payload: axios({
+            method: 'GET',
+            url: `${config.baseURL}/transfer`,
+            headers: {
+              Authorization: token
+            }
+        })
+    }
+}
 
 export const postTransfer = (token, data) => {
   return {

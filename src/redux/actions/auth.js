@@ -6,7 +6,7 @@ export const login = log => {
     type: "LOGIN",
     payload: axios({
       method: 'POST',
-      url: `${config.baseURL}/auth/login`,
+      url: `${config.baseURL}/login`,
       data: log,
       // headers: {
       //   'Access-Control-Allow-Origin': '*'
@@ -26,7 +26,7 @@ export const register = (data) => {
     type: "REGISTER",
     payload: axios({
       method: 'POST',
-      url: `${config.baseURL}/auth/sign-up`,
+      url: `${config.baseURL}/sign-up`,
       data: data
     })
   }

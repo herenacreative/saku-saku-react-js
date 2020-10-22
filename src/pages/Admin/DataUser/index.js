@@ -1,21 +1,17 @@
-import { React, connect, Link, useEffect, useState, qs, useHistory } from "libraries";
-import { Layout, Table, Typography, Tooltip, Button, Image, message, Popconfirm } from 'antd';
+import { React, connect, useEffect, useState, useHistory, queryString, Link } from "libraries";
+import { Layout, Table, Typography, Button, Image, message, Popconfirm } from 'antd';
 import { AddUser, EditUser, Footers, Headers, Navigation, NavigationAdmin } from "components/organisms";
 import '../../../assets/scss/main.scss';
 import { getAllUsers, deleteUser } from 'redux/actions';
-import { EditOutlined, DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { DeleteOutlined, QuestionCircleOutlined } from '@ant-design/icons';
 import config from '../../../configs/index';
-
-const { Content } = Layout;
-const { Text } = Typography;
 
 const DataUser = (props) => {
     const [users, setUsers] = useState([])
     const history = useHistory()
 
     useEffect(() => {
-        console.log(props.auth, 'n', props.users)
-        let parsed = qs.parse(props.location.search);
+        let parsed = queryString.parse(props.location.search);
         let search = parsed.search || "";
         let limit = parsed.limit || "100";
         let page = parsed.page || "";
@@ -112,7 +108,7 @@ const DataUser = (props) => {
     ]
 
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+        console.log(pagination, filters, sorter, extra);
     }
 
     const data = [{}]
@@ -121,7 +117,7 @@ const DataUser = (props) => {
         data.push({
             key: id,
             id: item.id,
-            fullname: item.fullname,
+            fullname: <Link to={`/transfer/${item.id}`}>{item.fullname}</Link>,
             email: item.email,
             photo: <Image width={50} height={50} src={`${config.imgURL}/${item.photo}`}/>,
             username: item.username,
@@ -129,18 +125,7 @@ const DataUser = (props) => {
             verify: item.verify,
             role: item.role,
             update: 
-            // <Link to={`/data-user/${item.id}`}>
                 <EditUser match={props.match} detailUser={item} onClick={() => history.push(`data-user/${item.id}`)}/>,
-            //  </Link>,
-             // update: <Tooltip title="search">
-            //         <Button
-            //             onClick={()=>history.push(`transfer/${item.id}`)} 
-            //             style={{ marginRight: "10px" }} 
-            //             type="primary" 
-            //             shape="circle" 
-            //             icon={<EditOutlined />} 
-            //         />
-            //     </Tooltip>,
             delete: 
                 <Popconfirm title="Are you sure？" onConfirm={()=>onDelete(item.id)} icon={<QuestionCircleOutlined style={{ color: 'red' }} />}>
                 <Button

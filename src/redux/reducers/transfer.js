@@ -27,26 +27,26 @@ const transfer = (state = initialState, action) => {
         isError: false,
         data: action.payload.data.data
       };
-    // case "GET_ID_TRANSFER_PENDING":
-    //     return {
-    //         ...state,
-    //         isLoading: true,
-    //         isError: false
-    //     };
-    // case "GET_ID_TRANSFER_REJECTED":
-    //     return {
-    //         ...state,
-    //         isLoading: false,
-    //         isError: true,
-    //         errorMsg: "Data rejected"
-    //     };
-    // case "GET_ID_TRANSFER_FULFILLED":
-    //     return {
-    //         ...state,
-    //         isLoading: false,
-    //         isError: false,
-    //         data: action.payload.data.data
-    //     };
+    case "GET_ADMIN_TRANSFER_PENDING":
+        return {
+            ...state,
+            isLoading: true,
+            isError: false
+        };
+    case "GET_ADMIN_TRANSFER_REJECTED":
+        return {
+            ...state,
+            isLoading: false,
+            isError: true,
+            errorMsg: "Data rejected"
+        };
+    case "GET_ADMIN_TRANSFER_FULFILLED":
+        return {
+            ...state,
+            isLoading: false,
+            isError: false,
+            data: action.payload.data.data
+        };
     case "POST_TRANSFER_PENDING":
       return {
         ...state,

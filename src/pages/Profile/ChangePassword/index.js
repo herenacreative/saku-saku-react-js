@@ -18,29 +18,25 @@ const ChangePassword = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("")
 
   const handleSubmit = (e) => {
+    console.log(oldPassword, 'k', props.auth.data.password)
     e.preventDefault()
-    const id = props.auth.data.id
-    const token = props.auth.data.tokenLogin
-    const formData = {
-      'password': confirmPassword
-    }
-    console.log(props.auth.data, 'kkk')
-    if (oldPassword === props.auth.data.password) {
-      if(newPassword === confirmPassword){
-        props.patchUser(id, formData, token)
-        .then(() => {
-          message.success('Change Password Successfully')
-        })
-        .catch((error) => {
-          message.error('Upss Change Password Not Successful...')
-          console.log(error);
-        })
-      }else{
+      if (newPassword != confirmPassword) {
         message.error('Password Baru Tidak Sama')
+      } else {
+        const id = props.auth.data.id
+        const token = props.auth.data.tokenLogin
+        const formData = {
+          'password': confirmPassword
+        }
+        props.patchUser(id, formData, token)
+          .then(() => {
+            message.success('Change Password Successfully')
+          })
+          .catch((error) => {
+            message.error('Upss Change Password Not Successful...')
+            console.log(error);
+          })
       }
-    }else{
-      message.error('Password lama Salah')
-    }
   }
 
   return (
@@ -58,38 +54,38 @@ const ChangePassword = (props) => {
                   </Text>
               </div>
               <form onSubmit={handleSubmit}>
-              <div style={{ width: "300px", margin: "20px 0 20px 0" }}>
-                <Input.Password
-                  onChange={e => setOldPassword(e.target.value)}
-                  value={oldPassword}
-                  className="input__line"
-                  bordered={false}
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  placeholder="Current password"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                />
-                <Input.Password
-                  onChange={e => setNewPassword(e.target.value)}
-                  value={newPassword}
-                  className="input__line"
-                  bordered={false}
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  placeholder="New password"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                />
-                <Input.Password
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  value={confirmPassword}
-                  className="input__line"
-                  bordered={false}
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  placeholder="Repeat New password"
-                  iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                />
-                <Button htmlType="submit" block className="btn__primary" block>
-                  Change Password
+                <div style={{ width: "300px", margin: "20px 0 20px 0" }}>
+                  {/* <Input.Password
+                    onChange={e => setOldPassword(e.target.value)}
+                    value={oldPassword}
+                    className="input__line"
+                    bordered={false}
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                    placeholder="Current password"
+                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                  /> */}
+                  <Input.Password
+                    onChange={e => setNewPassword(e.target.value)}
+                    value={newPassword}
+                    className="input__line"
+                    bordered={false}
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                    placeholder="New password"
+                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                  />
+                  <Input.Password
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    value={confirmPassword}
+                    className="input__line"
+                    bordered={false}
+                    prefix={<LockOutlined className="site-form-item-icon" />}
+                    placeholder="Repeat New password"
+                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                  />
+                  <Button htmlType="submit" block className="btn__primary" block>
+                    Change Password
                 </Button>
-              </div>
+                </div>
               </form>
             </Content>
           </div>
@@ -101,10 +97,10 @@ const ChangePassword = (props) => {
   )
 }
 
-  const mapStateToProps = (state) => ({
-    users: state.users,
-    auth: state.auth
-  })
-  const mapDispatchToProps = { patchUser }
+const mapStateToProps = (state) => ({
+  users: state.users,
+  auth: state.auth
+})
+const mapDispatchToProps = { patchUser }
 
-  export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
+export default connect(mapStateToProps, mapDispatchToProps)(ChangePassword)
