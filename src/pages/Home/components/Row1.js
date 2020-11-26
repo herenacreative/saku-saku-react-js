@@ -21,7 +21,7 @@ const Row1 = () => {
         </Col>
 
         {/* right content 1  */}
-        <Col flex="1 1" className={style.right__content}>
+        <Col flex="1 1">
           <div className={style.btn__top}>
             <Button className={style.btn__light} onClick={() => history.push('/auth/login')}>
               Login
@@ -31,6 +31,7 @@ const Row1 = () => {
             </Button>
           </div>
           
+          <div style={{margin: 10}}>
           <div className={style.text__}>
             <div className={style.m__30}>
               <Title className={style.width__}>
@@ -53,6 +54,7 @@ const Row1 = () => {
               <Avatar shape="square" src={gplay} />
               <Avatar shape="square" src={appstore} />
             </Space>
+          </div>
           </div>
         </Col>
       </Row>

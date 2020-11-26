@@ -10,9 +10,9 @@ const Footers = (props) => {
   return (
     <>
       <Footer className="container__set">
-        <div className="flex__sb">
+        <div className="flex__sb_2">
           <Text className="font__light">2020 Zwallet. All right reserved.</Text>
-          <div className="flex__start">
+          <div className="flex__start_2">
             <div className="font__light">{numPhone}</div>
             <div className="font__light">{email}</div>
           </div>

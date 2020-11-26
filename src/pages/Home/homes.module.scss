@@ -13,6 +13,7 @@
    color: var(--color-primary) !important;
 }
 .img__1{
+    animation-timing-function: linear;
     width: 20em;
     height: auto;
 }
@@ -85,8 +86,12 @@
     color : var(--color-light) !important;
     background-color: var(--color-primary) !important;
 }
-
-
+.right__content {
+    margin: 5rem 1rem
+}
+.space__{
+    padding: 10px;
+}
 
 @media screen and (min-width: 600px) and (max-width:900px){
     .left__content {
@@ -107,7 +112,9 @@
     .center__text {
         width: 100% !important;
     }
-    
+    .footers__ {
+        padding: 20px;
+    }
 }
 
 @media screen and (max-width: 600px){

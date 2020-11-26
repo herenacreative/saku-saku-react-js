@@ -1,7 +1,8 @@
 @media screen and (max-width: 768px) {
-    .left__auth {
-        display: none;
-    }
+    // .left__auth {
+    //     display: none;
+    //     width: 70%;
+    // }
     .right__auth {
         padding: 15px;
         margin-top: 10%;
@@ -20,4 +21,14 @@
         margin: 5px !important;
     }
     
+}
+@media screen and (max-width: 600px) {
+    .left__auth {
+        display: none;
+    }
+
+    .right__auth {
+        padding: 15px;
+        margin-top: 10%;
+    }
 }

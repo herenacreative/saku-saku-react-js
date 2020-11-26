@@ -1,6 +1,6 @@
 import { React, useState, connect, useEffect, useHistory, Link, moment } from "libraries";
 import { Layout, Row, Col, Typography, Skeleton, Button, Space, Statistic, Tooltip, Empty } from 'antd';
-import { Footers, Headers, Navigation } from "components/organisms";
+import { ChartData, Footers, Headers, Navigation } from "components/organisms";
 import '../../assets/scss/main.scss';
 import style from './dashboards.module.scss';
 import { getAllTransfer } from 'redux/actions';
@@ -106,6 +106,7 @@ const Dashboard = (props) => {
                     />
                   </Col>
                 </Row>
+                <ChartData/>
               </Col>
               {/* col-2 chart  */}
 

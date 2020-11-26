@@ -16,9 +16,9 @@ const Row3 = () => {
           the application and it’s totally free 
           to use by all users around the world.
         </p>
-        <div className={style.m__10}>
+        <div>
           <Space direction="horizontal" className={style.vertical__}>
-              <Space direction="vertical" align="center">
+              <Space direction="vertical" align="center" className={style.space__}>
                 <Avatar src={iphone2} size={70}/>
                 <Title level={5}>24/7 Support</Title>
                 <div className={style.text__ac}>
@@ -29,7 +29,7 @@ const Row3 = () => {
                   </Text>
                 </div>
               </Space>
-              <Space direction="vertical" align="center" className={style.cards}>
+              <Space direction="vertical" align="center" className={style.space__}>
                 <Avatar src={ikey} size={70}/>
                 <Title level={5}>Data Privacy</Title>
                 <div className={style.text__ac}>
@@ -40,7 +40,7 @@ const Row3 = () => {
                 </Text>
                 </div>
               </Space>
-              <Space direction="vertical" align="center">
+              <Space direction="vertical" align="center" className={style.space__}>
                 <Avatar src={idown} size={70}/>
                 <Title level={5}>Easy Download</Title>
                 <div className={style.text__ac}>

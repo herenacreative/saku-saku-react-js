@@ -7,5 +7,6 @@ import Drawers from "./Drawers";
 import EditUser from "./Form/EditUser/index";
 import EditTopup from "./Form/EditTopup/index";
 import AddTopUp from "./Form/AddTopUp/index";
+import ChartData from "./ChartData";
 
-export { Drawers, AddTopUp, EditTopup, EditUser, LeftAuth, Navigation, NavigationAdmin, Headers, Footers};
+export { Drawers, ChartData, AddTopUp, EditTopup, EditUser, LeftAuth, Navigation, NavigationAdmin, Headers, Footers};

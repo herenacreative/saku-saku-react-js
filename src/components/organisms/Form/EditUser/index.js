@@ -7,7 +7,7 @@ import config from '../../../../configs/index';
 
 const EditUser = (props) => {
   const [visible, setVisible] = useState(false)
-  const { balance, email, photo, fullname, phone, role, username, verify } = props.detailUser
+  const { balance, email, photo, fullname, phone, role, id, username, verify } = props.detailUser
   const [user, setUser] = useState({
     balance,
     email,
@@ -16,7 +16,8 @@ const EditUser = (props) => {
     photo,
     role,
     username,
-    verify
+    verify,
+    id
   })
   const showDrawer = () => {
     setVisible(true)
@@ -27,7 +28,7 @@ const EditUser = (props) => {
   }
 
   const handleSubmit = () => {
-    const id = props.auth.data.id
+    const id = user.id
     const token = props.auth.data.tokenLogin
     const formData = new FormData();
     formData.append('username', user.username)
@@ -38,7 +39,7 @@ const EditUser = (props) => {
     formData.append('phone', user.phone)
     formData.append('verify', user.verify)
     formData.append('role', user.role)
-    delete formData['id'];
+    // formData.append('id', user.id)
     
     props.patchUser(id, formData, token)
       .then(() => {
@@ -169,22 +170,19 @@ const EditUser = (props) => {
               </Form.Item>
             </Col>
           </Row>
-          {/* <Row gutter={16}>
+          <Row gutter={16}>
               <Col span={24}>
-                <Form.Item
-                  name="description"
-                  label="Description"
-                  // rules={[
-                    {
-                      required: true,
-                      message: 'please enter url description',
-                    },
-                  ]}
-                >
-                  <Input.TextArea rows={4} placeholder="please enter url description" />
-                </Form.Item>
+              <Form.Item name="id" label="ID">
+                <Input
+                  disabled={true}
+                  value={user.id}
+                  onChange={(e) => setUser({ ...user, id: e.target.value })}
+                  placeholder="Please enter user id"
+                />
+                {console.log(user.id)}
+              </Form.Item>
               </Col>
-            </Row> */}
+            </Row>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item>

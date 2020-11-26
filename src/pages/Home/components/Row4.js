@@ -17,7 +17,7 @@ const Row1 = () => {
 
         {/* right content 1  */}
         <Col flex="1 1" className={style.right__content}>
-          <div className={style.m__10}>
+          <div>
             <Title>
               All The <span className={style.font__title}>Great </span> 
               Zwallet Features.

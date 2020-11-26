@@ -1,5 +1,5 @@
 import { React, connect, useHistory, moment } from "libraries";
-import { Layout, Typography, Button } from 'antd';
+import { Layout, Typography, Button, Avatar } from 'antd';
 import { Footers, Headers, Navigation } from "components/organisms";
 import '../../../assets/scss/main.scss'
 import { Cards, CardsText } from "components/molecules";
@@ -12,9 +12,10 @@ const { Title } = Typography;
 const Status = (props) => {
   const { statuses } = props
   const history = useHistory()
-  const getData = props.location ? props.location : props.location.input.getDetail
-  // const getData = props.location.input.getDetail
-  const getProfile = props.users ? props.users : props.users.data[0]
+  // const getData = props.location ? props.location : props.location.input.getDetail
+  const getData = props.location.input.getDetail
+  // const getProfile = props.users ? props.users : props.users.data[0]
+  const getProfile = props.users.data[0]
   const time = moment(getData.created_at || moment.now()).format("lll");
   // console.log(props.location, 'll', props)
   return (
@@ -36,7 +37,7 @@ const Status = (props) => {
                 <Button type="primary" icon={<ShareAltOutlined />} />
                 <Button style={{ margin: "0 5px 0 5px" }} type="primary" icon={<DownloadOutlined />}>
                   Download PDF
-                                </Button>
+                </Button>
                 <Button type="primary" onClick={() => history.push('/dashboard')}>Back To Home</Button>
               </div>
             </Content>
@@ -53,7 +54,7 @@ const FailedTransaction = () => {
   return (
     <>
       <Status statuses={<div style={{ textAlign: "center", margin: '10px' }}>
-        <img src={failed} style={{ margin: '20px' }} />
+        <Avatar src={failed} style={{ margin: '20px' }} />
         <Title level={5}>Transfer Failed</Title>
       </div>} />
     </>
@@ -64,7 +65,7 @@ const SuccessTransaction = () => {
   return (
     <>
       <Status statuses={<div style={{ textAlign: "center", margin: '10px' }}>
-        <img src={success} style={{ margin: '20px' }} />
+        <Avatar src={success} style={{ margin: '20px' }} />
         <Title level={5}>Transfer Success</Title>
       </div>} />
     </>

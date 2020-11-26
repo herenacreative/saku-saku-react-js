@@ -5,7 +5,7 @@ import { PrivateRoute, PublicRoute } from 'utils';
 import {login} from "redux/actions"
 
 const Routes = (props) => {
-    console.log(props.login, 'll', props.auth)
+    // console.log(props.login, 'll', props.auth)
     return (
         <>
             <Switch>

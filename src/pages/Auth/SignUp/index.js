@@ -54,7 +54,7 @@ const SignUp = (props) => {
           </Text>
 
           <form onSubmit={handleSubmit}>
-            <div className="form__input">
+            <div className="form__input_2">
               <Input
                 value={username}
                 onChange={e=> setUsername(e.target.value)}
@@ -82,11 +82,7 @@ const SignUp = (props) => {
                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
               />
               <Text type="secondary" className="font__12">*Min length password 3 character</Text>
-              <div style={{ textAlign: "right" }}>
-                <Link to="/auth/forgot-password">
-                  <Text>Forgot Password?</Text>
-                </Link>
-              </div>
+             
             </div>
             <Button type="primary" htmlType="submit" block className="btn__primary">
               Sign Up

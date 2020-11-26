@@ -41,6 +41,7 @@ const transfer = (state = initialState, action) => {
             errorMsg: "Data rejected"
         };
     case "GET_ADMIN_TRANSFER_FULFILLED":
+      console.log(action.payload.data, 'lo')
         return {
             ...state,
             isLoading: false,

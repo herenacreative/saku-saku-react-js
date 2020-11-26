@@ -18,7 +18,8 @@ import {
     DashboardAdmin,
     DataUser,
     DataTopUp,
-    DataTransferAdmin
+    DataTransferAdmin,
+    NotFound
 } from "pages";
 
 const privateRoutes = [
@@ -142,6 +143,11 @@ const privateRoutes = [
         exact: true,
         path: "/data-transfer-admin"
     },
+    // {
+    //     name: "NotFound",
+    //     component: NotFound,
+    //     exact: true,
+    // },
 ];
 
 export default privateRoutes;
