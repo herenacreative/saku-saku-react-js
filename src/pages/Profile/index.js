@@ -42,8 +42,23 @@ const Profile = (props) => {
       })
   }
 
+  const getUserId = () =>{
+    const token = props.auth.data.tokenLogin
+    const id = props.auth.data.id
+    props.getAllUsers(token, id)
+      .then(res => {
+        setUser(res.value.data.data[0])
+        console.log(res.value, 'val')
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   useEffect(() => {
     getUserAll()
+    getUserId()
+    // console.log(props.auth.data)
   }, [])
 
   const handleSubmit = () => {
@@ -56,9 +71,10 @@ const Profile = (props) => {
 
     props.patchUser(id, formData, token)
       .then(() => {
+        window.location.reload();
+        // props.history.push('/profile')
         message.success('Update Profile Successfully')
         setVisible(false)
-        window.location.reload();
       })
       .catch((error) => {
         message.error('Upss Update Profile Not Successful...')
@@ -69,6 +85,7 @@ const Profile = (props) => {
   const onLogout = () => {
     props.logout()
     props.history.replace("/auth/login")
+    setUser()
   }
 
   return (
