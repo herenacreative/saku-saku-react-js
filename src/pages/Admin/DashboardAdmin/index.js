@@ -125,7 +125,14 @@ const DashboardAdmin = (props) => {
                                 {item.fullname}
                               </Tooltip>
                             }
-                            count={item.amount}
+                            count={
+                              <Statistic
+                                title={<Text className="font__light">Balance</Text>}
+                                value={item.amount}
+                                valueStyle={{ color: 'red', fontWeight: 'bold', fontSize: '12px' }}
+                                prefix="- Rp"
+                              />
+                            }
                             image={`${config.imgURL}/${item.photo}`}
                           />
                         )
